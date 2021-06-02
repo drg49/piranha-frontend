@@ -1,6 +1,9 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { GlobalCtx } from '../App'
 
+const postsPerPage = 3;
+let arrayForHoldingPosts = [];
+
 const Dashboard = () => {
     const { gState, setGState } = useContext(GlobalCtx)
     const { url, token } = gState
@@ -10,7 +13,16 @@ const Dashboard = () => {
     const imgRef = useRef(null)
     const noteRef = useRef(null)
 
-    const getPosts = async () => {
+    const [postsToShow, setPostsToShow] = useState([]);
+    const [next, setNext] = useState(3);
+
+    const loopWithSlice = (start, end, val) => {
+        const slicedPosts = val.slice(start, end)
+        arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
+        setPostsToShow(arrayForHoldingPosts);
+      };
+
+    const getPosts = async (a, b) => {
         const response = await fetch(url + "/post/", {
             method: "GET",
             headers: {
@@ -19,12 +31,18 @@ const Dashboard = () => {
         })
         const data = await response.json()
         console.log(data)
-        setPosts(data)
+        loopWithSlice(a, b, data.reverse())
+        // setPosts(data)
     }
 
     useEffect(() => {
-        getPosts()
+        getPosts(0, postsPerPage)
     }, [])
+
+    const handleShowMorePosts = () => {
+        getPosts(next, next + postsPerPage);
+        setNext(next + postsPerPage);
+      };
 
     const handleClick = () => {
         const note = noteRef.current.value
@@ -40,8 +58,9 @@ const Dashboard = () => {
         .then(response => response.json())
         .then(data => {
             noteRef.current.value = "";
-            getPosts();
+            getPosts(next, next + postsPerPage);
         })
+        .then(() => window.location.reload())
     }
 
     return (
@@ -53,14 +72,15 @@ const Dashboard = () => {
             <button onClick={handleClick}>Create Post</button>
             {/*  */}
             <section id="post-board">
-                {posts ? posts.map((post) => {
+                {postsToShow ? postsToShow.map((post) => {
                     return (
-                        <div>
-                            <h3>{post.note}</h3>
+                        <div id="post">
                             <img src={post.img} />
+                            <h3>{post.note}</h3>
                         </div>
                     )
                 }) : null}
+                <button onClick={handleShowMorePosts}>Load more</button>
             </section>
         </div>
     )

@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Home from './pages/Home'
-import Dashboard from './pages/Dashboard'
+import MyProfile from './pages/MyProfile'
 import './App.css';
 import AllPosts from './pages/AllPosts'
 
@@ -37,7 +37,7 @@ function App() {
             <Route exact path="/" render={(rp => gState.token ? <AllPosts /> : <Home />)}/>
             <Route path="/signup" render={(rp) => <Signup {...rp}/>} />
             <Route path="/login" render={(rp) => <Login {...rp}/>}/>
-            <Route path="/my_profile" render={(rp => gState.token ? <Dashboard /> : <Home />)}/>
+            <Route path="/my_profile" render={(rp => gState.token ? <MyProfile /> : <Home />)}/>
           </Switch>
         </main>
       </div>
