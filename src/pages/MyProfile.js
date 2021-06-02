@@ -1,9 +1,12 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { GlobalCtx } from '../App'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 const moment = require("moment")
 const postsPerPage = 3;
 let arrayForHoldingPosts = [];
+
+const trash = <FontAwesomeIcon icon={faTrash} />
 
 const Dashboard = () => {
     const { gState } = useContext(GlobalCtx)
@@ -96,7 +99,7 @@ const Dashboard = () => {
                             <img src={post.img} />
                             <h3 id="post-note">{post.note}</h3>
                             <hr/>
-                            <button onClick={() => handleDelete(post._id)}>Delete</button>
+                            <button onClick={() => handleDelete(post._id)}>{trash}</button>
                         </div>
                     )
                 }) : null}
@@ -106,6 +109,5 @@ const Dashboard = () => {
     )
 
 }
-
 
 export default Dashboard
