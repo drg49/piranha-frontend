@@ -23,4 +23,13 @@ nav {
 
 img {
   width: 725px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+#post-note {
+  max-width: 603px;
+  margin: auto;
+  padding: 2px 0px 10px 0px;
+  word-wrap: break-word;
 }

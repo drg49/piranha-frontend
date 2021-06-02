@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, useHistory } from 'react-router-dom'
 import Header from './components/Header'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
@@ -12,7 +12,9 @@ import AllPosts from './pages/AllPosts'
 
 export const GlobalCtx = createContext(null)
 
-function App() {
+function App(props) {
+
+  let history = useHistory()
 
   const [gState, setGState] = useState({
     url: "http://localhost:4000", 
@@ -27,10 +29,15 @@ function App() {
       }
     }, [])
 
+  const loadPage = () => {
+    history.push("/")
+    window.location.reload()
+  }
+
   return (
     <GlobalCtx.Provider value = {{gState, setGState}}>
       <div className="App">
-        <Link to="/"><h1>Postland</h1></Link>
+        <h1 onClick={loadPage}>Postland</h1>
         <Header />
         <main>
           <Switch>

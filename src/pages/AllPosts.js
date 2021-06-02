@@ -4,6 +4,7 @@ const moment = require('moment')
 const postsPerPage = 3;
 let arrayForHoldingPosts = [];
 
+
 const AllPosts = () => {
     const { gState, setGState } = useContext(GlobalCtx)
     const { url, token } = gState
@@ -28,11 +29,16 @@ const AllPosts = () => {
         console.log(data)
         loopWithSlice(a, b, data.reverse())
         // setPosts(data)
+        
     }
 
     useEffect(() => {
+        
         getAllPosts(0, postsPerPage)
+        
     }, [])
+    
+    
 
     const handleShowMorePosts = () => {
         getAllPosts(next, next + postsPerPage);
@@ -51,7 +57,7 @@ const AllPosts = () => {
                             <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                         </section>
                         <img src={post.img} />
-                        <h3>{post.note}</h3>
+                        <h3 id="post-note">{post.note}</h3>
                     </div>
                 )
             }) : null}

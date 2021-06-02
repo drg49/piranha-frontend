@@ -39,6 +39,8 @@ const Dashboard = () => {
         getPosts(0, postsPerPage)
     }, [])
 
+
+    
     const handleShowMorePosts = () => {
         getPosts(next, next + postsPerPage);
         setNext(next + postsPerPage);
@@ -76,7 +78,7 @@ const Dashboard = () => {
                     return (
                         <div id="post">
                             <img src={post.img} />
-                            <h3>{post.note}</h3>
+                            <h3 id="post-note">{post.note}</h3>
                         </div>
                     )
                 }) : null}
@@ -86,5 +88,6 @@ const Dashboard = () => {
     )
 
 }
+
 
 export default Dashboard
