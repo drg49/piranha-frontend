@@ -7,7 +7,7 @@ let arrayForHoldingPosts = [];
 const AllPosts = () => {
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState
-    const [posts, setPosts] = useState(null)
+    const [currentUser, setCurrentUser] = useState(null)
     const [postsToShow, setPostsToShow] = useState([]);
     const [next, setNext] = useState(3);
 
@@ -28,15 +28,41 @@ const AllPosts = () => {
         console.log(data)
         loopWithSlice(a, b, data.reverse())
     }
-
+    // We are going to grab the current user so we can add delete/edit buttons to only their posts.
+    const getUser = async () => {
+        const response = await fetch(url + "/post/logged_in_user/", {
+            method: "GET",
+            headers: {
+                Authorization: "bearer " + token
+            }
+        })
+        const data = await response.json()
+        setCurrentUser(data[0].username)
+    }
+    
     useEffect(() => {
         getAllPosts(0, postsPerPage)
+        getUser()
     }, [])
     
     const handleShowMorePosts = () => {
         getAllPosts(next, next + postsPerPage);
         setNext(next + postsPerPage);
     };
+
+    const handleDelete = (id) => {
+        fetch(url + "/post/" + id, {
+            method: "DELETE",
+            headers: {
+                "Authorization": "bearer " + token
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            getAllPosts(next, next + postsPerPage);
+        })
+        .then(() => window.location.reload())
+    }
 
     return (
         <>
@@ -51,6 +77,8 @@ const AllPosts = () => {
                         </section>
                         <img src={post.img} />
                         <h3 id="post-note">{post.note}</h3>
+                        {/* If the current user is equal to the post username, then add a delete button! */}
+                        {currentUser === post.username ? <> <hr/> <button onClick={() => handleDelete(post._id)}>Delete</button> </> : null}
                     </div>
                 )
             }) : null}

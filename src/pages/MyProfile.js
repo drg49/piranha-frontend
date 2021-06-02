@@ -88,7 +88,7 @@ const Dashboard = () => {
             <section id="post-board">
                 {postsToShow ? postsToShow.map((post) => {
                     return (
-                        <div id="post">
+                        <div id="post" key={post._id}>
                             <section id="post-header">
                                 <h2>{post.username}</h2>
                                 <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
