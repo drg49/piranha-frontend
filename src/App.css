@@ -22,7 +22,9 @@ nav {
 }
 
 img {
-  width: 725px;
+  width: 650px;
+  height: 470px;
+  object-fit: cover;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
 }
@@ -32,4 +34,12 @@ img {
   margin: auto;
   padding: 2px 0px 10px 0px;
   word-wrap: break-word;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  color: #333; /* old IE */
+  background-color: #333; /* Modern Browsers */
+  margin: 0px 0px 5px 0px;
 }

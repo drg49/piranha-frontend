@@ -4,9 +4,8 @@ const moment = require('moment')
 const postsPerPage = 3;
 let arrayForHoldingPosts = [];
 
-
 const AllPosts = () => {
-    const { gState, setGState } = useContext(GlobalCtx)
+    const { gState } = useContext(GlobalCtx)
     const { url, token } = gState
     const [posts, setPosts] = useState(null)
     const [postsToShow, setPostsToShow] = useState([]);
@@ -28,22 +27,16 @@ const AllPosts = () => {
         const data = await response.json()
         console.log(data)
         loopWithSlice(a, b, data.reverse())
-        // setPosts(data)
-        
     }
 
     useEffect(() => {
-        
         getAllPosts(0, postsPerPage)
-        
     }, [])
     
-    
-
     const handleShowMorePosts = () => {
         getAllPosts(next, next + postsPerPage);
         setNext(next + postsPerPage);
-      };
+    };
 
     return (
         <>
