@@ -1,10 +1,10 @@
 # Welcome to POSTLAND
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An image social media app created by Daniel Gavin.
 
-## Available Scripts
+## Created with the MERN stack
 
-In the project directory, you can run:
+Postland is a full stack application created with MongoDB, Express, React, and Node.js.
 
 ### `npm start`
 
