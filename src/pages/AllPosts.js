@@ -75,7 +75,7 @@ const AllPosts = () => {
             <section id="post-board">
             {postsToShow ? postsToShow.map((post) => {
                 return (
-                    <div id="post">
+                    <div id="post" key={post._id}>
                         <section id="post-header">
                             {currentUser === post.username ? <Link to="/my_profile"><h2>{post.username}</h2></Link> : <Link to={`/user/${post.username}`}><h2>{post.username}</h2></Link>}
                             <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>

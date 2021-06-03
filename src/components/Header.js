@@ -11,18 +11,11 @@ const Header = () => {
         setGState({...gState, token: null})
     }}>Logout</h2></Link>)
 
-    const signup = (<Link to="/signup"><h2>Signup</h2></Link>)
-
-    const login = (<Link to="/login"><h2>Login</h2></Link>)
-
     const myProfile = (<Link to="/my_profile"><h2>My Profile</h2></Link>)
 
     return (
         <nav>
-            {/* Show signup/login if the user isn't currently logged in */}
-            {gState.token ? null: signup}
-            {gState.token ? null : login}
-            {/* Show logout if the user is currently logged in */}
+            {/* Show logout and myProfile if the user is currently logged in */}
             {gState.token ? myProfile : null}
             {gState.token ? logout : null}
         </nav>

@@ -7,6 +7,8 @@ nav {
   justify-content: space-around;
 }
 
+/* POST CARDS //////////////////////////////// */
+
 #post {
   border: 1px solid black;
   width: fit-content;
@@ -43,3 +45,46 @@ hr {
   background-color: #333; /* Modern Browsers */
   margin: 0px 0px 5px 0px;
 }
+
+/* /////////////////////////////////////////// */
+
+
+/* LOGIN - SIGNUP PAGES ////////////////////// */
+
+#account-form {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+form input {
+  display: block;
+  width: 330px;
+  font-size: 17px;
+  margin-top: 20px;
+  padding: 14px 16px;
+}
+
+form input:last-of-type {
+  margin: auto;
+  margin-top: 20px;
+  width: 366px
+}
+
+#form-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+#margin-space {
+  margin-left: 5px;
+}
+
+#error-text {
+  color: red;
+  font-weight: 500;
+  margin: auto;
+  word-wrap: break-word;
+  width: 357px;
+}
+
+/* /////////////////////////////////////////// */

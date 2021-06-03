@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import {Link} from 'react-router-dom'
 import { GlobalCtx } from "../App"
 
 const Signup = (props) => {
@@ -13,6 +14,7 @@ const Signup = (props) => {
     }
 
     const [form, setForm] = useState(blank)
+    const [errorText, setErrorText] = useState("")
 
     const handleChange = (event) => {
         setForm({...form, [event.target.name]: event.target.value})
@@ -32,19 +34,30 @@ const Signup = (props) => {
         .then(response => response.json())
         .then(data => {
             setForm(blank)
-            props.history.push("/login")
+            if(data.error){
+                setErrorText("There is already an account with that username. Please choose another one.")
+            } else {
+                props.history.push("/login")
+            }
         })
     }
 
     return (
-        <nav>
+        <>
+        <section id="account-form">
+            <p id="error-text">{errorText}</p>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="username" value={form.username} onChange={handleChange} placeholder="Username" />
                 <input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" />
                 <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email (optional)" />
                 <input type="submit" value="Sign Up" />
             </form>
-        </nav>
+        </section>
+        <div id="form-bottom">
+        <p>Have an account?</p>
+        <Link to="/login"><p id="margin-space">Log in</p></Link>
+        </div>
+        </>
     )
 
 }
