@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
 import { GlobalCtx } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 const moment = require('moment')
 const postsPerPage = 3;
 let arrayForHoldingPosts = [];
 
 const trash = <FontAwesomeIcon icon={faTrash} />
+const edit = <FontAwesomeIcon icon={faPencilAlt} />
 
 const AllPosts = () => {
     const { gState } = useContext(GlobalCtx)
@@ -69,6 +70,8 @@ const AllPosts = () => {
         .then(() => window.location.reload())
     }
 
+    
+
     return (
         <>
             <h1>All Posts</h1>
@@ -83,7 +86,7 @@ const AllPosts = () => {
                         <img src={post.img} />
                         <h3 id="post-note">{post.note}</h3>
                         {/* If the current user is equal to the post username, then add a delete button! */}
-                        {currentUser === post.username ? <> <hr/> <button onClick={() => handleDelete(post._id)}>{trash}</button> </> : null}
+                        {currentUser === post.username ? <> <hr/> <button>{edit}</button> <button onClick={() => handleDelete(post._id)}>{trash}</button> </> : null}
                     </div>
                 )
             }) : null}
