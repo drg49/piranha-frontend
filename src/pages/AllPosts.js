@@ -70,7 +70,13 @@ const AllPosts = () => {
         .then(() => window.location.reload())
     }
 
-    
+    const [editForm, setEditForm] = useState(null)
+    const [currentID, setCurrentID] = useState(null)
+
+    const handleUpdate = (id) => {
+        setEditForm(<input type="text" />)
+        setCurrentID(id)
+    }
 
     return (
         <>
@@ -84,9 +90,9 @@ const AllPosts = () => {
                             <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                         </section>
                         <img src={post.img} />
-                        <h3 id="post-note">{post.note}</h3>
+                        <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
                         {/* If the current user is equal to the post username, then add a delete button! */}
-                        {currentUser === post.username ? <> <hr/> <button>{edit}</button> <button onClick={() => handleDelete(post._id)}>{trash}</button> </> : null}
+                        {currentUser === post.username ? <> <hr/> <button onClick={() => handleUpdate(post._id)}>{edit}</button> <button onClick={() => handleDelete(post._id)}>{trash}</button> </> : null}
                     </div>
                 )
             }) : null}
