@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { GlobalCtx } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
@@ -73,9 +73,37 @@ const AllPosts = () => {
     const [editForm, setEditForm] = useState(null)
     const [currentID, setCurrentID] = useState(null)
 
-    const handleUpdate = (id) => {
-        setEditForm(<input type="text" />)
+
+    const [update,setUpdate] = useState({note: ''})
+    let idVar; 
+    const handleChange = (event) => {
+        setUpdate({...update, [event.target.name]: event.target.value})
+        setEditForm(<><input type="text" onChange={handleChange} id="update" value={event.target.value} name="note"/><button onClick={() => handleUpdate(idVar)}>Submit</button></>)
+    }
+
+    const beginUpdate = (id, currentNote) => {
+        setUpdate({note: currentNote})
+        setEditForm(<><input type="text" onChange={handleChange} id="update" value={currentNote} name="note"/><button onClick={() => handleUpdate(id)}>Submit</button></>)
         setCurrentID(id)
+        idVar = id
+    }
+    
+    const handleUpdate = (id) => {
+        console.log(id)
+        const note = document.getElementById("update").value
+        fetch(url + "/post/" + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "bearer " + token
+            },
+            body: JSON.stringify({note})
+        })
+        .then(response => response.json())
+        .then(data => {
+            getAllPosts(next, next + postsPerPage);
+        })
+        .then(() => window.location.reload())
     }
 
     return (
@@ -92,7 +120,7 @@ const AllPosts = () => {
                         <img src={post.img} />
                         <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
                         {/* If the current user is equal to the post username, then add a delete button! */}
-                        {currentUser === post.username ? <> <hr/> <button onClick={() => handleUpdate(post._id)}>{edit}</button> <button onClick={() => handleDelete(post._id)}>{trash}</button> </> : null}
+                        {currentUser === post.username ? <> <hr/> <button onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> <button onClick={() => handleDelete(post._id)}>{trash}</button> </> : null}
                     </div>
                 )
             }) : null}
