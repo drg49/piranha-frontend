@@ -41,7 +41,7 @@ const UserProfile = (props) => {
 
     return (
         <div>
-            <h1>My Posts</h1>
+            <h1>User Profile</h1>
             <section id="post-board">
                 {postsToShow ? postsToShow.map((post) => {
                     return (
