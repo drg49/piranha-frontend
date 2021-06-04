@@ -16,6 +16,10 @@ const AllPosts = () => {
     const [currentUser, setCurrentUser] = useState(null)
     const [postsToShow, setPostsToShow] = useState([]);
     const [next, setNext] = useState(3);
+    const [editForm, setEditForm] = useState(null)
+    const [currentID, setCurrentID] = useState(null)
+    const [update,setUpdate] = useState({note: ''})
+    let idVar; 
 
     const loopWithSlice = (start, end, val) => {
         const slicedPosts = val.slice(start, end)
@@ -70,12 +74,6 @@ const AllPosts = () => {
         .then(() => window.location.reload())
     }
 
-    const [editForm, setEditForm] = useState(null)
-    const [currentID, setCurrentID] = useState(null)
-
-
-    const [update,setUpdate] = useState({note: ''})
-    let idVar; 
     const handleChange = (event) => {
         setUpdate({...update, [event.target.name]: event.target.value})
         setEditForm(<><input type="text" onChange={handleChange} id="update" value={event.target.value} name="note"/><button onClick={() => handleUpdate(idVar)}>Submit</button></>)
