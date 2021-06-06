@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import {useHistory} from 'react-router-dom'
 import { GlobalCtx } from '../App'
 import axios from 'axios'
+import loading from '../components/Loading.gif'
 
 const CreatePost = () => {
     const { gState } = useContext(GlobalCtx)
@@ -11,12 +12,12 @@ const CreatePost = () => {
     const [info, setInfo] = useState({
       image: ''
     })
-    const [progressPercent, setProgressPercent] = useState("Upload Here")
+    const [progressPercent, setProgressPercent] = useState(null)
     const [error, setError] = useState({
       found: false,
       message: ''
     })
-    const [submitBtn, setSubmitBtn] = useState(<button type="submit" >Submit</button>)
+    const [submitBtn, setSubmitBtn] = useState(<button type="submit" >Upload</button>)
     const [captionInput, setCaptionInput] = useState(null)
     let history = useHistory() 
   
@@ -26,10 +27,10 @@ const CreatePost = () => {
       data.append('categoryImage', files[0])
       data.append('name', files.name)
       setFormData(data)
-      setSubmitBtn(<button type="submit" >Submit</button>)
+      setSubmitBtn(<button type="submit" >Upload</button>)
     }
   
-    const [uploadBtn, setUploadBtn] = useState(<input type="file" onChange={upload}></input>)
+    const [uploadBtn, setUploadBtn] = useState(<input type="file" onChange={upload} class="custom-file-input"></input> )
   
     // Send request
     const handleSubmit = (event) => {
@@ -37,29 +38,25 @@ const CreatePost = () => {
       setInfo({
         image: ''
       })
-      const options = {
-        onUploadProgress: () => {
-          setProgressPercent("Loading, please wait.") // replace with loading icon
-        }
-      }
 
       const headers = {headers: {
         "Authorization": "bearer " + token
       }}
   
-      axios.post(url + '/post/', formData, headers, options) //change this to url || heroku link later
+      axios.post(url + '/post/', formData, headers) //change this to url || heroku link later
       .then(res => {
-          console.log(res)
+        setProgressPercent(<img src={loading} id="load-gif" alt="Loading"/>)
         setSubmitBtn(null)
         setUploadBtn(null)
-        console.log(res.data.category)
         setTimeout(()=> {
           setInfo(res.data.category)
-          setProgressPercent("Done")
+          setProgressPercent("Image Uploaded!")
           setCaptionInput(<div><input type="text" id="cap"/> <button onClick={() => addCaption(res.data.category._id, document.getElementById("cap").value)}>Post</button></div>)
         }, 1000)
+        setTimeout(() => {
+          setProgressPercent(<br />)
+        }, 4000)
       }).catch(err => {
-        console.log(err.response)
         setError({
           found: true,
           message: err.response.data.errors
@@ -70,7 +67,7 @@ const CreatePost = () => {
             found: false,
             message: ''
           })
-          setProgressPercent("Error, please choose another file.")
+          setProgressPercent("Please choose a valid image file to upload.")
         }, 3000)
       })
     }
@@ -88,14 +85,15 @@ const CreatePost = () => {
     }
 
 
+
     return (
         <div className="App">
         <main>
           {error.found && (
-              <div>
-                { error.message }
-              </div>
-         )}
+            <div>
+              { error.message }
+            </div>
+          )}
   
            <div>
              {progressPercent}
@@ -105,11 +103,11 @@ const CreatePost = () => {
             <div>
              {uploadBtn}
             </div>
-              {submitBtn}
+             {submitBtn}
          </form>
         </main>
         <section>
-          <img src={url + `/${info.image}`} id="img-hide-broken" alt="" />
+          {info.image ? <img src={url + `/${info.image}`} id="uploaded-img" alt="" /> : null}
         </section>
         {captionInput}
       </div>

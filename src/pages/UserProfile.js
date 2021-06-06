@@ -50,7 +50,7 @@ const UserProfile = (props) => {
                                 <h2>{post.username}</h2>
                                 <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                             </section>
-                            <img src={post.img} />
+                            <img src={url + `/${post.image}`} />
                             <h3 id="post-note">{post.note}</h3>
                         </div>
                     )
