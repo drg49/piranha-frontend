@@ -21,6 +21,7 @@ const Dashboard = (props) => {
     const [editForm, setEditForm] = useState(null)
     const [currentID, setCurrentID] = useState(null)
     const [update,setUpdate] = useState({note: ''})
+    const [postLength, setPostLength] = useState(null)
     let idVar; 
 
     const loopWithSlice = (start, end, val) => {
@@ -37,7 +38,7 @@ const Dashboard = (props) => {
             }
         })
         const data = await response.json()
-        console.log(data)
+        setPostLength(data.length)
         loopWithSlice(a, b, data.reverse())
     }
 
@@ -98,7 +99,7 @@ const Dashboard = (props) => {
         })
         .then(() => window.location.reload())
     }
-
+    
     return (
         <div>
             <h1>My Posts</h1>
@@ -121,7 +122,7 @@ const Dashboard = (props) => {
                         </div>
                     )
                 }) : null}
-                <button onClick={handleShowMorePosts}>Load more</button>
+                {postLength > 3 ? <button onClick={handleShowMorePosts}>Load more</button> : null}
             </section>
         </div>
     )
