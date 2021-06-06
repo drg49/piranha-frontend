@@ -11,6 +11,7 @@ const UserProfile = (props) => {
     const { url, token } = gState
     const [postsToShow, setPostsToShow] = useState([]);
     const [next, setNext] = useState(3);
+    const [postLength, setPostLength] = useState(null)
 
     const loopWithSlice = (start, end, val) => {
         const slicedPosts = val.slice(start, end)
@@ -26,7 +27,7 @@ const UserProfile = (props) => {
             }
         })
         const data = await response.json()
-        console.log(data)
+        setPostLength(data.length)
         loopWithSlice(a, b, data.reverse())
     }
 
@@ -38,7 +39,7 @@ const UserProfile = (props) => {
         getUserProfile(next, next + postsPerPage);
         setNext(next + postsPerPage);
     };
-
+    
     return (
         <div>
             <h1>User Profile</h1>
@@ -55,7 +56,7 @@ const UserProfile = (props) => {
                         </div>
                     )
                 }) : null}
-                <button onClick={handleShowMorePosts}>Load more</button>
+                {postLength > 3 ? <button onClick={handleShowMorePosts}>Load more</button> : null}
             </section>
         </div>
     )
