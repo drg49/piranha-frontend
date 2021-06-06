@@ -8,6 +8,7 @@ import MyProfile from './pages/MyProfile'
 import UserProfile from './pages/UserProfile'
 import './App.css';
 import AllPosts from './pages/AllPosts'
+import CreatePost from './pages/CreatePost'
 
 
 
@@ -47,6 +48,7 @@ function App(props) {
             <Route path="/login" render={(rp) => <Login {...rp}/>}/>
             <Route path="/my_profile" render={(rp => gState.token ? <MyProfile /> : <Home />)}/>
             <Route path="/user/:user" render={(rp => gState.token ? <UserProfile {...rp}/> : <Home />)}/>
+            <Route path="/create_post" render={(rp => gState.token ? <CreatePost {...rp}/> : <Home />)}/>
           </Switch>
         </main>
       </div>
