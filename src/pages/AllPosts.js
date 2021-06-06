@@ -76,18 +76,17 @@ const AllPosts = () => {
 
     const handleChange = (event) => {
         setUpdate({...update, [event.target.name]: event.target.value})
-        setEditForm(<><input type="text" onChange={handleChange} id="update" value={event.target.value} name="note"/><button onClick={() => handleUpdate(idVar)}>Submit</button></>)
+        setEditForm(<><input type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"/><button onClick={() => handleUpdate(idVar)}>Submit</button></>)
     }
 
     const beginUpdate = (id, currentNote) => {
         setUpdate({note: currentNote})
-        setEditForm(<><input type="text" onChange={handleChange} id="update" value={currentNote} name="note"/><button onClick={() => handleUpdate(id)}>Submit</button></>)
+        setEditForm(<><input type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"/><button onClick={() => handleUpdate(id)}>Submit</button></>)
         setCurrentID(id)
         idVar = id
     }
     
     const handleUpdate = (id) => {
-        console.log(id)
         const note = document.getElementById("update").value
         fetch(url + "/post/" + id, {
             method: "PUT",
