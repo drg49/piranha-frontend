@@ -56,7 +56,7 @@ const Signup = (props) => {
                 <input type="text" name="username" value={form.username} onChange={handleChange} placeholder="Username" onKeyDown={preventSpace} minLength="3" maxLength="15" required/>
                 <input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" minLength="3" maxLength="30" required/>
                 <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email (optional)" maxLength="256"/>
-                <input type="submit" value="Sign Up" />
+                <input type="submit" value="Sign Up" id="create-account"/>
             </form>
         </section>
         <div id="form-bottom">

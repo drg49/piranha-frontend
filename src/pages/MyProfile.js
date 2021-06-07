@@ -117,12 +117,14 @@ const Dashboard = (props) => {
                             <img src={url + `/${post.image}`} />
                             <h3 id="post-note">{currentID === post._id ? editForm : post.note}</h3>
                             <hr/>
-                            <button onClick={() => beginUpdate(post._id, post.note)}>{edit}</button>
-                            <button onClick={() => handleDelete(post._id)}>{trash}</button>
+                            <div id="post-btns">
+                                <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button>
+                                <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button>
+                            </div>
                         </div>
                     )
                 }) : null}
-                {postLength > 3 ? <button onClick={handleShowMorePosts}>Load more</button> : null}
+                {postLength > 3 ? <button onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </div>
     )
