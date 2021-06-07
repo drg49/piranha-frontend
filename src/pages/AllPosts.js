@@ -104,8 +104,6 @@ const AllPosts = () => {
         .then(() => window.location.reload())
     }   
 
-    console.log(postsToShow.length)
-    console.log(postLength)
     return (
         <>
             <h1>All Posts</h1>

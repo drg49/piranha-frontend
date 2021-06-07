@@ -112,7 +112,7 @@ const MyProfile = (props) => {
                                 <h2>{post.username}</h2>
                                 <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                             </section>
-                            <img src={url + `/${post.image}`} />
+                            <img src={url + `/${post.image}`} alt="Post created by you"/>
                             <h3 id="post-note">{currentID === post._id ? editForm : post.note}</h3>
                             <hr/>
                             <div id="post-btns">
