@@ -118,11 +118,11 @@ const AllPosts = () => {
                         <img src={url + `/${post.image}`} />
                         <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
                         {/* If the current user is equal to the post username, then add a delete button! */}
-                        {currentUser === post.username ? <> <hr/> <button onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> <button onClick={() => handleDelete(post._id)}>{trash}</button> </> : null}
+                        {currentUser === post.username ? <> <hr/> <div id="post-btns"> <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> </div> </> : null}
                     </div>
                 )
             }) : null}
-            {postLength > 3 ? <button onClick={handleShowMorePosts}>Load more</button> : null}
+            {postLength > 3 ? <button onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </>
     )

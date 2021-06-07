@@ -60,7 +60,7 @@ const Login = (props) => {
             <form onSubmit={handleSubmit}>
                 <input type="text" name="username" value={form.username} onChange={handleChange} placeholder="Username" onKeyDown={preventSpace} minLength="3" maxLength="15" required/>
                 <input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" minLength="3" maxLength="30" required/>
-                <input type="submit" value="Login" />
+                <input type="submit" value="Login" id="login"/>
             </form>
         </section>
         <div id="form-bottom">
