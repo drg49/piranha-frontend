@@ -22,7 +22,7 @@ const Header = () => {
         window.location.reload()
     }
 
-    const allPosts = (<Link><h1 className="header-btn" onClick={goToPosts} style={{paddingLeft: "49px"}}>{globe}</h1></Link>)
+    const allPosts = (<Link><h1 className="header-btn" onClick={goToPosts} style={{paddingLeft: "50px"}}>{globe}</h1></Link>)
 
     const myProfile = (<Link to="/my_profile"><h2 className="header-btn">{user}</h2></Link>)
 
