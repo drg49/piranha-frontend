@@ -4,7 +4,7 @@ import { GlobalCtx } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 const moment = require("moment")
-const postsPerPage = 3;
+const postsPerPage = 15;
 let arrayForHoldingPosts = [];
 
 const trash = <FontAwesomeIcon icon={faTrash} />
@@ -16,7 +16,7 @@ const MyProfile = (props) => {
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState 
     const [postsToShow, setPostsToShow] = useState([]);
-    const [next, setNext] = useState(3);
+    const [next, setNext] = useState(15);
     const [editForm, setEditForm] = useState(null)
     const [currentID, setCurrentID] = useState(null)
     const [update,setUpdate] = useState({note: ''})
@@ -122,7 +122,7 @@ const MyProfile = (props) => {
                         </div>
                     )
                 }) : null}
-                {postLength > 3 ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
+                {postLength !== postsToShow.length && postLength > 15  ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </div>
     )

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 const moment = require('moment')
-const postsPerPage = 3;
+const postsPerPage = 15;
 let arrayForHoldingPosts = [];
 
 const trash = <FontAwesomeIcon icon={faTrash} />
@@ -15,7 +15,7 @@ const AllPosts = () => {
     const { url, token } = gState
     const [currentUser, setCurrentUser] = useState(null)
     const [postsToShow, setPostsToShow] = useState([]);
-    const [next, setNext] = useState(3);
+    const [next, setNext] = useState(15);
     const [editForm, setEditForm] = useState(null)
     const [currentID, setCurrentID] = useState(null)
     const [update,setUpdate] = useState({note: ''})
@@ -102,8 +102,10 @@ const AllPosts = () => {
             getAllPosts(next, next + postsPerPage);
         })
         .then(() => window.location.reload())
-    }
+    }   
 
+    console.log(postsToShow.length)
+    console.log(postLength)
     return (
         <>
             <h1>All Posts</h1>
@@ -115,14 +117,14 @@ const AllPosts = () => {
                             {currentUser === post.username ? <Link to="/my_profile"><h2>{post.username}</h2></Link> : <Link to={`/user/${post.username}`}><h2>{post.username}</h2></Link>}
                             <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                         </section>
-                        <img src={url + `/${post.image}`} />
+                        <img src={url + `/${post.image}`} alt={`Post from ${post.username}`}/>
                         <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
                         {/* If the current user is equal to the post username, then add a delete button! */}
                         {currentUser === post.username ? <> <hr/> <div id="post-btns"> <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> </div> </> : null}
                     </div>
                 )
             }) : null}
-            {postLength > 3 ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
+            {postLength !== postsToShow.length && postLength > 15  ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </>
     )

@@ -30,7 +30,7 @@ const CreatePost = () => {
       setSubmitBtn(<button type="submit" id="upload-btn">Upload</button>)
     }
   
-    const [uploadBtn, setUploadBtn] = useState(<input type="file" onChange={upload} class="custom-file-input"></input> )
+    const [uploadBtn, setUploadBtn] = useState(<input type="file" onChange={upload} className="custom-file-input"></input> )
   
     // Send request
     const handleSubmit = (event) => {
@@ -83,8 +83,6 @@ const CreatePost = () => {
     })
         history.push("/")
     }
-
-
 
     return (
         <div className="App">

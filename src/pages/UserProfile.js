@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { GlobalCtx } from '../App'
 const moment = require('moment')
 
-const postsPerPage = 3;
+const postsPerPage = 15;
 let arrayForHoldingPosts = [];
 
 const UserProfile = (props) => {
@@ -10,7 +10,7 @@ const UserProfile = (props) => {
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState
     const [postsToShow, setPostsToShow] = useState([]);
-    const [next, setNext] = useState(3);
+    const [next, setNext] = useState(15);
     const [postLength, setPostLength] = useState(null)
 
     const loopWithSlice = (start, end, val) => {
@@ -56,7 +56,7 @@ const UserProfile = (props) => {
                         </div>
                     )
                 }) : null}
-                {postLength > 3 ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
+                {postLength !== postsToShow.length && postLength > 15  ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </div>
     )
