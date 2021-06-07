@@ -10,10 +10,9 @@ let arrayForHoldingPosts = [];
 const trash = <FontAwesomeIcon icon={faTrash} />
 const edit = <FontAwesomeIcon icon={faPencilAlt} />
 
-const Dashboard = (props) => {
+const MyProfile = (props) => {
 
     let history = useHistory()
-
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState 
     const [postsToShow, setPostsToShow] = useState([]);
@@ -50,7 +49,6 @@ const Dashboard = (props) => {
         getPosts(next, next + postsPerPage);
         setNext(next + postsPerPage);
       };
-
 
     const handleDelete = (id) => {
         fetch(url + "/post/" + id, {
@@ -104,7 +102,7 @@ const Dashboard = (props) => {
         <div>
             <h1>My Posts</h1>
             {/* NEW POST */}
-            <button onClick={goToCreate}>Create Post</button>
+            <button id="create-btn" onClick={goToCreate}>Create Post</button>
             {/*  */}
             <section id="post-board">
                 {postsToShow ? postsToShow.map((post) => {
@@ -124,11 +122,11 @@ const Dashboard = (props) => {
                         </div>
                     )
                 }) : null}
-                {postLength > 3 ? <button onClick={handleShowMorePosts}>See more</button> : null}
+                {postLength > 3 ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </div>
     )
 
 }
 
-export default Dashboard
+export default MyProfile

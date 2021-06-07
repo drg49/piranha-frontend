@@ -17,7 +17,7 @@ const CreatePost = () => {
       found: false,
       message: ''
     })
-    const [submitBtn, setSubmitBtn] = useState(<button type="submit" >Upload</button>)
+    const [submitBtn, setSubmitBtn] = useState(null)
     const [captionInput, setCaptionInput] = useState(null)
     let history = useHistory() 
   
@@ -27,7 +27,7 @@ const CreatePost = () => {
       data.append('categoryImage', files[0])
       data.append('name', files.name)
       setFormData(data)
-      setSubmitBtn(<button type="submit" >Upload</button>)
+      setSubmitBtn(<button type="submit" id="upload-btn">Upload</button>)
     }
   
     const [uploadBtn, setUploadBtn] = useState(<input type="file" onChange={upload} class="custom-file-input"></input> )

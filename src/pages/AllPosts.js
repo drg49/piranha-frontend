@@ -122,7 +122,7 @@ const AllPosts = () => {
                     </div>
                 )
             }) : null}
-            {postLength > 3 ? <button onClick={handleShowMorePosts}>See more</button> : null}
+            {postLength > 3 ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </>
     )

@@ -14,6 +14,21 @@ a {
   text-decoration: none;
 }
 
+#see-more-btn {
+  padding: 9px 13px;
+  background-color: rgb(22, 111, 229);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+#see-more-btn:hover {
+  cursor: pointer;
+  background-color: rgba(22, 111, 229, 0.85)
+}
+
 /* HEADER //////////////////////////////////// */
 
 .header-btn {
@@ -184,6 +199,7 @@ form input:last-of-type {
 
 #uploaded-img {
   border: 1px solid black;
+  margin-top: 10px;
 }
 
 #load-gif {
@@ -215,5 +231,36 @@ form input:last-of-type {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
+#upload-btn {
+  padding: 10px 14px;
+  background-color: rgb(54, 164, 32);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+#upload-btn:hover {
+  cursor: pointer;
+  background-color: rgba(54, 164, 32, 0.85)
+}
+
+/* /////////////////////////////////////////// */
+
+/* MY PROFILE PAGE /////////////////////////// */
+
+#create-btn {
+  padding: 10px 14px;
+  background-color: rgb(54, 164, 32);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+#create-btn:hover {
+  cursor: pointer;
+  background-color: rgba(54, 164, 32, 0.85)
+}
 
 /* /////////////////////////////////////////// */
