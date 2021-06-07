@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react'
-import { Switch, Route, Link, useHistory } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
@@ -9,14 +9,11 @@ import UserProfile from './pages/UserProfile'
 import './App.css';
 import AllPosts from './pages/AllPosts'
 import CreatePost from './pages/CreatePost'
-
-
+import logo from './components/Logo.png'
 
 export const GlobalCtx = createContext(null)
 
-function App(props) {
-
-  let history = useHistory()
+function App() {
 
   const [gState, setGState] = useState({
     url: "http://localhost:4000", //change this to the Heroku link when you get the Heroku link.
@@ -31,15 +28,10 @@ function App(props) {
       }
     }, [])
 
-  const loadPage = () => {
-    history.push("/")
-    window.location.reload()
-  }
-
   return (
     <GlobalCtx.Provider value = {{gState, setGState}}>
       <div className="App">
-        <h1 onClick={loadPage}>Postland</h1>
+        <div id="app-title"><h1 id="app-name">Piranha</h1><img src={logo} id="logo" alt="Piranha logo"/></div>
         <Header />
         <main>
           <Switch>
