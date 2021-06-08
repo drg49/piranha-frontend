@@ -96,23 +96,26 @@ body {
 #post-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 0px 20px 0px 20px;
 }
 
 img {
   width: 595px;
-  height: 415px;
-  object-fit: cover;
+  max-height: 415px;
+  object-fit: contain;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
 }
 
 #post-note {
-  max-width: 603px;
+  max-width: 580px;
   margin: auto;
   padding: 2px 0px 10px 0px;
   word-wrap: break-word;
 }
+
+/* Edit-Delete Buttons */
 
 hr {
   border: none;
@@ -122,12 +125,19 @@ hr {
   margin: 0px;
 }
 
-#post-btns {
+#post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#edit-delete-btns {
+  width: fit-content;
   text-align: right;
   padding: 6px 9px 6px 0px;
 }
 
-#post-btns button {
+#edit-delete-btns button {
   outline:none;
   box-shadow:none;
   border: none;
@@ -139,12 +149,12 @@ hr {
   transition: all 400ms;
 }
 
-#post-btns button:hover {
+#edit-delete-btns button:hover {
   cursor: pointer;
   background-color: #fa7933;
 }
 
-#post-btns button[title='Delete']:hover {
+#edit-delete-btns button[title='Delete']:hover {
   cursor: pointer;
   background-color: #fa7933;
   color: rgb(253, 51, 51);
@@ -154,7 +164,24 @@ hr {
   margin-right: 7px;
 }
 
+#like-icon {
+  margin-left: 12px;
+  font-size: 22px;
+}
+
+#like-icon:hover {
+  cursor: pointer;
+  opacity: 91%;
+}
+
+/* Like Button */
+
+#just-like-btn {
+  text-align: left;
+}
+
 /* /////////////////////////////////////////// */
+
 
 /* WELCOME - HOME PAGE /////////////////////// */
 
@@ -206,6 +233,7 @@ hr {
 
 /* /////////////////////////////////////////// */
 
+
 /* LOGIN - SIGNUP PAGES ////////////////////// */
 
 #account-form {
@@ -248,6 +276,7 @@ form input:last-of-type {
 }
 
 /* /////////////////////////////////////////// */
+
 
 /* CREATE POST PAGE ////////////////////////// */
 
@@ -301,7 +330,29 @@ form input:last-of-type {
   background-color: rgba(54, 164, 32, 0.85)
 }
 
+#create-caption {
+  width: fit-content;
+  margin: auto;
+  text-align: right;
+}
+
+textarea {
+  resize: none;
+  width: 345px;
+  height: 54px;
+}
+
+#create-caption button {
+  padding: 5px 9px;
+  background-color: rgb(54, 164, 32);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
 /* /////////////////////////////////////////// */
+
 
 /* MY PROFILE PAGE /////////////////////////// */
 
