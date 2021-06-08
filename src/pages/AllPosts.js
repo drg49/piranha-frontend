@@ -53,8 +53,8 @@ const AllPosts = () => {
     }
     
     useEffect(() => {
-        getAllPosts(0, postsPerPage)
         getUser()
+        getAllPosts(0, postsPerPage)
     }, [])
     
     const handleShowMorePosts = () => {
@@ -104,7 +104,7 @@ const AllPosts = () => {
         })
         .then(() => window.location.reload())
     }
-
+    
     return (
         <>
             <h1>All Posts</h1>
@@ -124,13 +124,13 @@ const AllPosts = () => {
                         <hr/> 
                             <section id="post-footer">
                             {/* The username is the person who liked the post */}
-                            <LikeBtn postID={post._id} username={currentUser} />
+                            <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} />
                             <div id="edit-delete-btns"> 
                                 <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> 
                                 <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> 
                             </div>
                             </section> 
-                        </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} /></div></>}
+                        </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} /></div></>}
                     </div>
                 )
             }) : null}

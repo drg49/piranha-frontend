@@ -55,8 +55,8 @@ const MyProfile = (props) => {
     }
 
     useEffect(() => {
-        getPosts(0, postsPerPage)
         getUser()
+        getPosts(0, postsPerPage)
     }, [])
 
     const handleShowMorePosts = () => {
@@ -131,7 +131,7 @@ const MyProfile = (props) => {
                             <h3 id="post-note">{currentID === post._id ? editForm : post.note}</h3>
                             <hr/>
                             <section id="post-footer">
-                            <LikeBtn postID={post._id} username={currentUser} />
+                            <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)}/>
                             <div id="edit-delete-btns">
                                 <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button>
                                 <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button>

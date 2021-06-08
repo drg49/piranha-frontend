@@ -45,8 +45,8 @@ const UserProfile = (props) => {
     }
 
     useEffect(() => {
-        getUserProfile(0, postsPerPage)
         getUser()
+        getUserProfile(0, postsPerPage) 
     }, [])
 
     const handleShowMorePosts = () => {
@@ -67,7 +67,7 @@ const UserProfile = (props) => {
                             </section>
                             <img src={url + `/${post.image}`} alt={`Post by ${post.username}`}/>
                             <h3 id="post-note">{post.note}</h3>
-                            <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} /></div></>
+                            <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} /></div></>
                         </div>
                     )
                 }) : null}
