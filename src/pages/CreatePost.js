@@ -51,7 +51,7 @@ const CreatePost = () => {
         setTimeout(()=> {
           setInfo(res.data.category)
           setProgressPercent("Image Uploaded!")
-          setCaptionInput(<div><input type="text" id="cap"/> <button onClick={() => addCaption(res.data.category._id, document.getElementById("cap").value)}>Post</button></div>)
+          setCaptionInput(<div id="create-caption"><textarea type="text" id="cap" placeholder="Add a caption..."/><br /> <button onClick={() => addCaption(res.data.category._id, document.getElementById("cap").value)}>Post</button></div>)
         }, 1000)
         setTimeout(() => {
           setProgressPercent(<br />)

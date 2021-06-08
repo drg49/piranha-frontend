@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { GlobalCtx } from '../App'
+import LikeBtn from '../components/LikeBtn'
 const moment = require('moment')
 
 const postsPerPage = 15;
@@ -12,13 +13,14 @@ const UserProfile = (props) => {
     const [postsToShow, setPostsToShow] = useState([]);
     const [next, setNext] = useState(15);
     const [postLength, setPostLength] = useState(null)
+    const [currentUser, setCurrentUser] = useState(null)
 
     const loopWithSlice = (start, end, val) => {
         const slicedPosts = val.slice(start, end)
         arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
         setPostsToShow(arrayForHoldingPosts);
     };
-
+    //The profile that the current user is looking at
     const getUserProfile = async (a, b) => {
         const response = await fetch(url + "/post/users/" + username, {
             method: "GET",
@@ -30,9 +32,21 @@ const UserProfile = (props) => {
         setPostLength(data.length)
         loopWithSlice(a, b, data.reverse())
     }
+    //Gets the current user, not the user profile
+    const getUser = async () => {
+        const response = await fetch(url + "/post/logged_in_user/", {
+            method: "GET",
+            headers: {
+                Authorization: "bearer " + token
+            }
+        })
+        const data = await response.json()
+        setCurrentUser(data[0].username)
+    }
 
     useEffect(() => {
         getUserProfile(0, postsPerPage)
+        getUser()
     }, [])
 
     const handleShowMorePosts = () => {
@@ -42,7 +56,7 @@ const UserProfile = (props) => {
     
     return (
         <div>
-            <h1>User Profile</h1>
+            <h1>{username}</h1>
             <section id="post-board">
                 {postsToShow ? postsToShow.map((post) => {
                     return (
@@ -53,6 +67,7 @@ const UserProfile = (props) => {
                             </section>
                             <img src={url + `/${post.image}`} alt={`Post by ${post.username}`}/>
                             <h3 id="post-note">{post.note}</h3>
+                            <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} /></div></>
                         </div>
                     )
                 }) : null}

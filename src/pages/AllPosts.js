@@ -3,6 +3,7 @@ import { GlobalCtx } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import LikeBtn from '../components/LikeBtn'
 const moment = require('moment')
 const postsPerPage = 15;
 let arrayForHoldingPosts = [];
@@ -102,7 +103,7 @@ const AllPosts = () => {
             getAllPosts(next, next + postsPerPage);
         })
         .then(() => window.location.reload())
-    }   
+    }
 
     return (
         <>
@@ -117,8 +118,19 @@ const AllPosts = () => {
                         </section>
                         <img src={url + `/${post.image}`} alt={`Post from ${post.username}`}/>
                         <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
-                        {/* If the current user is equal to the post username, then add a delete button! */}
-                        {currentUser === post.username ? <> <hr/> <div id="post-btns"> <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> </div> </> : null}
+                        {/* If the current user is equal to the post username, then add a delete and edit button! */}
+                        {currentUser === post.username ? 
+                        <> 
+                        <hr/> 
+                            <section id="post-footer">
+                            {/* The username is the person who liked the post */}
+                            <LikeBtn postID={post._id} username={currentUser} />
+                            <div id="edit-delete-btns"> 
+                                <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> 
+                                <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> 
+                            </div>
+                            </section> 
+                        </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} /></div></>}
                     </div>
                 )
             }) : null}
