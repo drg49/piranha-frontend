@@ -102,6 +102,7 @@ const AllPosts = () => {
         .then(() => {
             getAllPosts(next, next + postsPerPage);
         })
+        .then(() => {getUser()})
         .then(() => window.location.reload())
     }
     
@@ -124,13 +125,13 @@ const AllPosts = () => {
                         <hr/> 
                             <section id="post-footer">
                             {/* The username is the person who liked the post */}
-                            <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} />
+                            <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} />
                             <div id="edit-delete-btns"> 
                                 <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> 
                                 <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> 
                             </div>
                             </section> 
-                        </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} /></div></>}
+                        </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>}
                     </div>
                 )
             }) : null}

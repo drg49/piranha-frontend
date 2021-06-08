@@ -106,9 +106,10 @@ const MyProfile = (props) => {
             body: JSON.stringify({note})
         })
         .then(response => response.json())
-        .then(data => {
+        .then(() => {
             getPosts(next, next + postsPerPage);
         })
+        .then(() => {getUser()})
         .then(() => window.location.reload())
     }
     
@@ -131,7 +132,7 @@ const MyProfile = (props) => {
                             <h3 id="post-note">{currentID === post._id ? editForm : post.note}</h3>
                             <hr/>
                             <section id="post-footer">
-                            <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)}/>
+                            <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} />
                             <div id="edit-delete-btns">
                                 <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button>
                                 <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button>
