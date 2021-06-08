@@ -67,7 +67,7 @@ const UserProfile = (props) => {
                             </section>
                             <img src={url + `/${post.image}`} alt={`Post by ${post.username}`}/>
                             <h3 id="post-note">{post.note}</h3>
-                            <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} /></div></>
+                            <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>
                         </div>
                     )
                 }) : null}

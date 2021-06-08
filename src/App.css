@@ -173,6 +173,8 @@ hr {
   margin-right: 7px;
 }
 
+/* Like Button */
+
 #like-icon {
   margin-left: 12px;
   font-size: 22px;
@@ -183,10 +185,23 @@ hr {
   opacity: 91%;
 }
 
-/* Like Button */
-
 #just-like-btn {
   text-align: left;
+}
+
+#like-section {
+  display: flex;
+  align-items: center;
+}
+
+#like-num {
+  padding-left: 10px;
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;
 }
 
 /* /////////////////////////////////////////// */
