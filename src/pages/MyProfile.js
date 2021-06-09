@@ -41,6 +41,7 @@ const MyProfile = (props) => {
         const data = await response.json()
         setPostLength(data.length)
         loopWithSlice(a, b, data.reverse())
+        await getUser()
     }
 
     const getUser = async () => {
@@ -55,8 +56,11 @@ const MyProfile = (props) => {
     }
 
     useEffect(() => {
-        getUser()
-        getPosts(0, postsPerPage)
+        async function fetchData() {
+            await getUser()
+            getPosts(0, postsPerPage)
+        }
+        fetchData()
     }, [])
 
     const handleShowMorePosts = () => {
