@@ -54,8 +54,11 @@ const AllPosts = () => {
     }
     
     useEffect(() => {
-        getUser()
-        getAllPosts(0, postsPerPage)
+        async function fetchData() {
+            await getUser()
+            getAllPosts(0, postsPerPage)
+        }
+        fetchData()
     }, [])
     
     const handleShowMorePosts = () => {
