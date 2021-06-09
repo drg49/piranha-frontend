@@ -317,7 +317,9 @@ form input:last-of-type {
 
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
+  margin-top: 20px;
 }
+
 .custom-file-input::before {
   content: 'Select image file';
   display: inline-block;
@@ -373,6 +375,11 @@ textarea {
   color: white;
   border-radius: 6px;
   font-size: 14px;
+}
+
+#create-caption button:hover {
+  cursor: pointer;
+  background-color: rgba(54, 164, 32, 0.85);
 }
 
 /* /////////////////////////////////////////// */
