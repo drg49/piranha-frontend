@@ -10,6 +10,7 @@ import './App.css';
 import AllPosts from './pages/AllPosts'
 import CreatePost from './pages/CreatePost'
 import logo from './components/Logo.png'
+import FollowersPosts from './pages/FollowerPosts'
 
 export const GlobalCtx = createContext(null)
 
@@ -37,6 +38,7 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/" render={(rp => gState.token ? <AllPosts /> : <Home />)}/>
+            <Route path="/home" render={(rp => gState.token ? <FollowersPosts /> : <Home />)}/>
             <Route path="/signup" render={(rp) => <Signup {...rp}/>} />
             <Route path="/login" render={(rp) => <Login {...rp}/>}/>
             <Route path="/my_profile" render={(rp => gState.token ? <MyProfile /> : <Home />)}/>

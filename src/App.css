@@ -10,6 +10,7 @@ nav {
   align-items: center;
   max-width: 900px;
   margin: auto;
+  padding: 0px 10px;
 }
 
 a {
@@ -401,6 +402,26 @@ textarea {
   background-color: rgba(54, 164, 32, 0.85)
 }
 
+#profile-header {
+  max-width: 595px;
+}
+
+#follow-data {
+  display: flex;
+  justify-content: start;
+  max-width: 595px;
+  margin: auto;
+  padding: 0px 10px;
+}
+
+#follow-data p:first-of-type {
+  margin-right: 20px;
+}
+
+#logout {
+  margin-bottom: 0;
+}
+
 /* /////////////////////////////////////////// */
 
 #user-title {
@@ -409,7 +430,7 @@ textarea {
 
 /* USER PROFILE PAGE ///////////////////////// */
 
-#follow-data {
+#user-follow {
   display: flex;
   justify-content: space-between;
   max-width: 200px;

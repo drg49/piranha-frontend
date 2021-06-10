@@ -5,6 +5,7 @@ import LikeBtn from '../components/LikeBtn'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import FollowData from '../components/FollowData'
+import LogoutBtn from '../components/LogoutBtn'
 const moment = require("moment")
 const postsPerPage = 15;
 let arrayForHoldingPosts = [];
@@ -54,7 +55,6 @@ const MyProfile = (props) => {
             }
         })
         const data = await response.json()
-        console.log(data[0])
         setCurrentUser(data[0].username)
         setFollowData({followers: data[0].followers, following: data[0].following})
     }
@@ -143,7 +143,10 @@ const MyProfile = (props) => {
         <div>
             {currentUser ? 
             <>
-            <h1 id="user-title">{currentUser}</h1>
+            <nav id="profile-header">
+                <h1 id="user-title">{currentUser}</h1>
+                <LogoutBtn />
+            </nav>
             <FollowData followData={followData}/> 
             <button id="create-btn" onClick={goToCreate}>Create Post</button>
             <h3>My Posts</h3>

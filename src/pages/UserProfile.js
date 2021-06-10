@@ -45,7 +45,6 @@ const UserProfile = (props) => {
             }
         })
         const data = await response.json()
-        console.log(data)
         setFollowData({followers: data.followers, following: data.following})
     }
 
