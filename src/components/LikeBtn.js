@@ -63,7 +63,6 @@ const LikeBtn = (props) => {
                 "Authorization": "bearer " + token
             }
         })
-        .then(response => response.json())
     }
 
     const removeLike = (postID, username) => {
@@ -74,7 +73,6 @@ const LikeBtn = (props) => {
                 "Authorization": "bearer " + token
             }
         })
-        .then(response => response.json())
     }
 
     return (

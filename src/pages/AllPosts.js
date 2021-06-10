@@ -60,6 +60,7 @@ const AllPosts = () => {
         }
         fetchData()
     }, [])
+
     
     const handleShowMorePosts = () => {
         getAllPosts(next, next + postsPerPage);
