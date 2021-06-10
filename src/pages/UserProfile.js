@@ -97,7 +97,7 @@ const UserProfile = (props) => {
     
     return (
         <div>
-            <h1>{username}</h1>
+            <h1 id="user-title">{username}</h1>
             {currentUserProfile ? <FollowBtn currentUser={currentUser} user={username} following={currentUserProfile.following.includes(username)} followData={followData} getUserAcct={getUserAccount}/> : null}
             <section id="post-board">
                 {postsToShow ? postsToShow.map((post) => {
