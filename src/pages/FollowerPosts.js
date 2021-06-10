@@ -57,7 +57,6 @@ const FollowersPosts = () => {
             }
         })
         const data = await response.json()
-        console.log(data)
         setPostLength(data.length)
         loopWithSlice(a, b, data.reverse())
     }

@@ -15,6 +15,7 @@ const CreatePost = () => {
     const uploadImage = async (e) => {
       const file = e.target.files[0];
       base64 = await convertBase64(file);
+      console.log(base64)
       setImg(<img src={base64} alt="Your post" id="uploaded-img"/>)
       setCaption(<><textarea type="text" id="cap" placeholder="Add a caption..."/><br /></>)
       setUpload(<button onClick={handleCreate} id="upload-btn">Upload</button>)
@@ -40,7 +41,6 @@ const CreatePost = () => {
         console.log("Please choose a file")
       } else {
         const note = document.getElementById("cap").value
-        console.log(note)
         fetch(url + "/post/", {
           method: "post",
           headers: {
