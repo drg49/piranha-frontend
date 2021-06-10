@@ -4,6 +4,7 @@ import { GlobalCtx } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import LikeBtn from '../components/LikeBtn'
+import loading from '../components/Loading.gif'
 
 const moment = require('moment')
 
@@ -24,6 +25,7 @@ const FollowersPosts = () => {
     const [currentID, setCurrentID] = useState(null)
     const [update,setUpdate] = useState({note: ''})
     const [postLength, setPostLength] = useState(null)
+    const [currentFollowers, setCurrentFollowers] = useState(null) //see if the user is following anyone to display a message.
     let idVar; 
 
     const [followers, setFollowers] = useState(null)
@@ -44,6 +46,7 @@ const FollowersPosts = () => {
         })
         const data = await response.json()
         setCurrentUser(data[0].username)
+        setCurrentFollowers(data[0].following.length)
         setFollowers(data[0].username + "," + data[0].following.join(","))
         // only get the posts from the users we follow including our own posts
         getFollowingPosts(data[0].username + "," + data[0].following.join(","), 0, postsPerPage)
@@ -117,12 +120,12 @@ const FollowersPosts = () => {
         .then(() => {getUser()})
         .then(() => window.location.reload())
     }
-
+    console.log(postsToShow.length)
     return (
         <>
         <h1>Your Feed</h1>
         <section id="post-board">
-        {postsToShow ? postsToShow.map((post) => {
+        {postsToShow.length > 0 ? postsToShow.map((post) => {
             return (
                 <div id="post" key={post._id}>
                     <section id="post-header">
@@ -146,7 +149,7 @@ const FollowersPosts = () => {
                     </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>}
                 </div>
             )
-        }) : null}
+        }) : currentFollowers === 0 ? null : <img id="load-gif" src={loading} alt="Loading"/>}
         {postLength !== postsToShow.length && postLength > 15  ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
         </section>
     </>

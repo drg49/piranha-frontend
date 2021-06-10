@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { GlobalCtx } from '../App'
 import LikeBtn from '../components/LikeBtn'
 import FollowBtn from '../components/FollowBtn'
+import loading from '../components/Loading.gif'
 const moment = require('moment')
 
 const postsPerPage = 15;
@@ -97,9 +98,9 @@ const UserProfile = (props) => {
     return (
         <div>
             <h1 id="user-title">{username}</h1>
-            {currentUserProfile ? <FollowBtn currentUser={currentUser} user={username} following={currentUserProfile.following.includes(username)} followData={followData} getUserAcct={getUserAccount}/> : null}
+            {currentUserProfile ? <FollowBtn currentUser={currentUser} user={username} following={currentUserProfile.following.includes(username)} followData={followData} getUserAcct={getUserAccount} currentUserLength={currentUserProfile.following.length} /> : null}
             <section id="post-board">
-                {postsToShow ? postsToShow.map((post) => {
+                {postsToShow.length > 0 ? postsToShow.map((post) => {
                     return (
                         <div id="post" key={post._id}>
                             <section id="post-header">
@@ -111,7 +112,7 @@ const UserProfile = (props) => {
                             <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>
                         </div>
                     )
-                }) : null}
+                }) : postsToShow.length === 0 ? null : <><img id="load-gif" src={loading} alt="Loading"/><p>Please wait while we grab your data</p></>}
                 {postLength !== postsToShow.length && postLength > 15  ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </div>
