@@ -311,9 +311,10 @@ form input:last-of-type {
 }
 
 #load-gif {
+  margin-top: 20px;
   border: none;
   object-fit: contain;
-  width: 180px;
+  width: 100px;
 }
 
 .custom-file-input::-webkit-file-upload-button {

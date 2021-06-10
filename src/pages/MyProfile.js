@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { GlobalCtx } from '../App'
 import LikeBtn from '../components/LikeBtn'
@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import FollowData from '../components/FollowData'
 import LogoutBtn from '../components/LogoutBtn'
+import loading from '../components/Loading.gif'
 const moment = require("moment")
 const postsPerPage = 15;
 let arrayForHoldingPosts = [];
@@ -152,7 +153,7 @@ const MyProfile = (props) => {
             <h3>My Posts</h3>
             </> : null }
             <section id="post-board">
-                {postsToShow ? postsToShow.map((post) => {
+                {postsToShow.length > 0 ? postsToShow.map((post) => {
                     return (
                         <div id="post" key={post._id}>
                             <section id="post-header">
@@ -171,7 +172,7 @@ const MyProfile = (props) => {
                             </section>
                         </div>
                     )
-                }) : null}
+                }) : postsToShow.length === 0 ? null : <><img id="load-gif" src={loading} alt="Loading"/><p>Please wait while we grab your data</p></>}
                 {postLength !== postsToShow.length && postLength > 15  ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </div>

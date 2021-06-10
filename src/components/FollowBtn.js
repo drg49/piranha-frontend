@@ -9,6 +9,7 @@ const FollowBtn = (props) => {
     const {user} = props
     const {following} = props
     const {followData} = props
+    const {currentUserLength} = props
 
     const setText = () => {
         if (following === false) {
@@ -22,13 +23,15 @@ const FollowBtn = (props) => {
     const [buttonTxt, setButtonTxt] = useState(setText()) //set the button text to be follow or unfollow!
     const [isFollowing, setIsFollowing] = useState(following)
 
-
     const handleFollow = () => {
         if (isFollowing === false) {
             setIsFollowing(true)
             setButtonTxt("Unfollow")
             addFollower(currentUser, user)
             props.getUserAcct()
+            if(currentUserLength === 0) {
+                window.location.reload()
+            }
         }
         if (isFollowing === true) {
             setIsFollowing(false)

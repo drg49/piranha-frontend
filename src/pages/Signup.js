@@ -4,7 +4,7 @@ import { GlobalCtx } from "../App"
 
 const Signup = (props) => {
 
-    const { gState, setGState } = useContext(GlobalCtx)
+    const { gState } = useContext(GlobalCtx)
     const {url} = gState 
 
     const blank = {

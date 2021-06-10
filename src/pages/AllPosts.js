@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import LikeBtn from '../components/LikeBtn'
+import loading from '../components/Loading.gif'
 import defaultIMG from '../components/def-img.jpg'
 
 const moment = require('moment')
@@ -115,7 +116,7 @@ const AllPosts = () => {
         <>
             <h1>Popular Posts</h1>
             <section id="post-board">
-            {postsToShow ? postsToShow.map((post) => {
+            {postsToShow.length > 0 ? postsToShow.map((post) => {
                 return (
                     <div id="post" key={post._id}>
                         <section id="post-header">
@@ -139,7 +140,7 @@ const AllPosts = () => {
                         </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>}
                     </div>
                 )
-            }) : null}
+            }) : <><img id="load-gif" src={loading} alt="Loading"/><p>Please wait while we grab your data</p></>}
             {postLength !== postsToShow.length && postLength > 15  ? <button id="see-more-btn" onClick={handleShowMorePosts}>See more</button> : null}
             </section>
         </>
