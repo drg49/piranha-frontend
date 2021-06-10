@@ -63,6 +63,24 @@ const MyProfile = (props) => {
         fetchData()
     }, [])
 
+    const [ locationKeys, setLocationKeys ] = useState([]) //Prevent bugs on browser back/forward button
+    useEffect(() => {
+      return history.listen(location => {
+        if (history.action === 'PUSH') {
+          setLocationKeys([ location.key ])
+        }
+        if (history.action === 'POP') {
+          if (locationKeys[1] === location.key) {
+            setLocationKeys(([ _, ...keys ]) => keys)
+            window.location.reload()
+          } else {
+            setLocationKeys((keys) => [ location.key, ...keys ])
+            window.location.reload()
+          }
+        }
+      })
+    }, [ locationKeys, ])
+
     const handleShowMorePosts = () => {
         getPosts(next, next + postsPerPage);
         setNext(next + postsPerPage);
@@ -119,11 +137,12 @@ const MyProfile = (props) => {
     
     return (
         <div>
-            {currentUser ? <h1>{currentUser}</h1> : null}
-            {/* NEW POST */}
+            {currentUser ? 
+            <>
+            <h1>{currentUser}</h1> 
             <button id="create-btn" onClick={goToCreate}>Create Post</button>
-            {/*  */}
             <h3>My Posts</h3>
+            </> : null }
             <section id="post-board">
                 {postsToShow ? postsToShow.map((post) => {
                     return (

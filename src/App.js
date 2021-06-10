@@ -28,6 +28,7 @@ function App() {
       }
     }, [])
 
+
   return (
     <GlobalCtx.Provider value = {{gState, setGState}}>
       <div className="App">

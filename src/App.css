@@ -402,3 +402,14 @@ textarea {
 }
 
 /* /////////////////////////////////////////// */
+
+/* USER PROFILE PAGE ///////////////////////// */
+
+#follow-data {
+  display: flex;
+  justify-content: space-between;
+  max-width: 200px;
+  margin: auto;
+}
+
+/* /////////////////////////////////////////// */
