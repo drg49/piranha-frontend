@@ -4,6 +4,7 @@ import { GlobalCtx } from '../App'
 import LikeBtn from '../components/LikeBtn'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import FollowData from '../components/FollowData'
 const moment = require("moment")
 const postsPerPage = 15;
 let arrayForHoldingPosts = [];
@@ -23,6 +24,7 @@ const MyProfile = (props) => {
     const [update,setUpdate] = useState({note: ''})
     const [postLength, setPostLength] = useState(null)
     const [currentUser, setCurrentUser] = useState(null)
+    const [followData, setFollowData] = useState({followers: [], following: []})
     let idVar; 
 
     const loopWithSlice = (start, end, val) => {
@@ -52,7 +54,9 @@ const MyProfile = (props) => {
             }
         })
         const data = await response.json()
+        console.log(data[0])
         setCurrentUser(data[0].username)
+        setFollowData({followers: data[0].followers, following: data[0].following})
     }
 
     useEffect(() => {
@@ -139,7 +143,8 @@ const MyProfile = (props) => {
         <div>
             {currentUser ? 
             <>
-            <h1>{currentUser}</h1> 
+            <h1 id="user-title">{currentUser}</h1>
+            <FollowData followData={followData}/> 
             <button id="create-btn" onClick={goToCreate}>Create Post</button>
             <h3>My Posts</h3>
             </> : null }
@@ -168,7 +173,6 @@ const MyProfile = (props) => {
             </section>
         </div>
     )
-
 }
 
 export default MyProfile
