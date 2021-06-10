@@ -1,7 +1,6 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import {useHistory} from 'react-router-dom'
 import { GlobalCtx } from '../App'
-import loading from '../components/Loading.gif'
 
 const CreatePost = () => {
     const { gState } = useContext(GlobalCtx)
@@ -11,20 +10,6 @@ const CreatePost = () => {
     const [img, setImg] = useState(null)
     const [caption, setCaption] = useState(null)
     let history = useHistory() 
-  
-  
-    const addCaption = (id, note) => {
-      fetch(url + "/post/" + id, {
-        method: "PUT",
-        headers: {
-            "Authorization": "bearer " + token,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({note})
-    })
-        history.push("/")
-    }
-
     let base64;
 
     const uploadImage = async (e) => {
@@ -64,9 +49,27 @@ const CreatePost = () => {
           },
           body: JSON.stringify({image: base64, note: note})
       })
-      .then(() => {history.push("/")})
+      .then(() => {history.push("/home")})
       }
     }
+
+    const [ locationKeys, setLocationKeys ] = useState([]) //Prevent bugs on browser back/forward button
+    useEffect(() => {
+      return history.listen(location => {
+        if (history.action === 'PUSH') {
+          setLocationKeys([ location.key ])
+        }
+        if (history.action === 'POP') {
+          if (locationKeys[1] === location.key) {
+            setLocationKeys(([ _, ...keys ]) => keys)
+            window.location.reload()
+          } else {
+            setLocationKeys((keys) => [ location.key, ...keys ])
+            window.location.reload()
+          }
+        }
+      })
+    }, [ locationKeys, ])
 
     return (
         <div className="App">
