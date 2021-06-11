@@ -31,9 +31,9 @@ const AllPosts = () => {
         arrayForHoldingPosts = [...arrayForHoldingPosts, ...slicedPosts];
         setPostsToShow(arrayForHoldingPosts);
     };
-
+    // Get all posts from the latest 60 days, (check the last route in the backend)
     const getAllPosts = async (a, b) => {
-        const response = await fetch(url + "/post/all/", {
+        const response = await fetch(url + "/post/all/latest", {
             method: "GET",
             headers: {
                 Authorization: "bearer " + token
