@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react"
+import { Link, useHistory } from "react-router-dom"
 import { GlobalCtx } from '../App'
 
 const FollowBtn = (props) => {
@@ -61,11 +62,32 @@ const FollowBtn = (props) => {
         })
     }
 
+    let history = useHistory()
+    const [ locationKeys, setLocationKeys ] = useState([]) //Prevent bugs on browser back/forward button
+    useEffect(() => {
+      return history.listen(location => {
+        if (history.action === 'PUSH') {
+          setLocationKeys([ location.key ])
+          window.location.reload()
+        }
+        if (history.action === 'POP') {
+          if (locationKeys[1] === location.key) {
+            setLocationKeys(([ _, ...keys ]) => keys)
+            window.location.reload()
+          } else {
+            setLocationKeys((keys) => [ location.key, ...keys ])
+            window.location.reload()
+          }
+        }
+      })
+    }, [ locationKeys, ])
+    
+
     return (
         <>
         <section id="user-follow">
-            <p>Followers: {followData.followers.length}</p>
-            <p>Following: {followData.following.length}</p>
+            <Link to={`/followers/${user}'s Followers/${user}/0`}><p>Followers: {followData.followers.length}</p></Link>
+            <Link to={`/followers/${user} is following/${user}/1`}><p>Following: {followData.following.length}</p></Link>
         </section>
         <button id="follow-btn" onClick={handleFollow}>{buttonTxt}</button>
         </>

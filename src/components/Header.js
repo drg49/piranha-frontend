@@ -22,9 +22,14 @@ const Header = () => {
         window.location.reload()
     }
 
+    const goToProfile = () => {
+        history.push("/my_profile")
+        window.location.reload()
+    }
+
     const allPosts = (<Link><h1 className="header-btn" onClick={goToPosts} title="Popular Posts">{globe}</h1></Link>)
     const myFollowers = (<Link><h1 className="header-btn" onClick={goToFollowPosts} title="My Feed">{home}</h1></Link>)
-    const myProfile = (<Link to="/my_profile"><h1 className="header-btn" title="My Profile">{user}</h1></Link>)
+    const myProfile = (<Link><h1 className="header-btn" onClick={goToProfile} title="My Profile">{user}</h1></Link>)
 
     return (
         <nav>
