@@ -112,12 +112,12 @@ const MyProfile = (props) => {
 
     const handleChange = (event) => {
         setUpdate({...update, [event.target.name]: event.target.value})
-        setEditForm(<><input type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"/><button onClick={() => handleUpdate(idVar)}>Submit</button></>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Submit</button></div>)
     }
 
     const beginUpdate = (id, currentNote) => {
         setUpdate({note: currentNote})
-        setEditForm(<><input type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"/><button onClick={() => handleUpdate(id)}>Submit</button></>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button onClick={() => handleUpdate(id)}>Submit</button></div>)
         setCurrentID(id)
         idVar = id
     }
