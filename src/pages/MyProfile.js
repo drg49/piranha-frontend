@@ -148,7 +148,7 @@ const MyProfile = (props) => {
                 <h1 id="user-title">{currentUser}</h1>
                 <LogoutBtn />
             </nav>
-            <FollowData followData={followData}/> 
+            <FollowData followData={followData} currentUser={currentUser}/> 
             <button id="create-btn" onClick={goToCreate}>Create Post</button>
             <h3>My Posts</h3>
             </> : null }

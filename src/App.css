@@ -453,3 +453,29 @@ textarea {
 }
 
 /* /////////////////////////////////////////// */
+
+/* Followers/Following Page Styling */
+
+#follow-list {
+  border: 1px solid black;
+  max-width: 420px;
+  margin: auto;
+  height: 400px;
+  overflow: auto;
+}
+
+#follow-list li {
+  text-align: left;
+  list-style: none;
+  padding: 6px 10px;
+  color: black;
+  border-bottom: 1px lightgray solid;
+}
+
+#follow-list li:hover {
+  background-color: rgb(219, 219, 219);
+}
+
+#followers-title {
+  margin-top: 0px;
+}

@@ -11,6 +11,7 @@ import AllPosts from './pages/AllPosts'
 import CreatePost from './pages/CreatePost'
 import logo from './components/Logo.png'
 import FollowersPosts from './pages/FollowerPosts'
+import Followers from './pages/Followers'
 
 export const GlobalCtx = createContext(null)
 
@@ -44,7 +45,7 @@ function App() {
             <Route path="/my_profile" render={(rp => gState.token ? <MyProfile /> : <Home />)}/>
             <Route path="/user/:user" render={(rp => gState.token ? <UserProfile {...rp}/> : <Home />)}/>
             <Route path="/create_post" render={(rp => gState.token ? <CreatePost {...rp}/> : <Home />)}/>
-            
+            <Route path="/followers/:name/:data/:num" render={(rp => gState.token ? <Followers {...rp}/> : <Home />)}/>
           </Switch>
         </main>
       </div>
