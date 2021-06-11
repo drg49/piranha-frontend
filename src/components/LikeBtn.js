@@ -6,6 +6,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 const likeIcon = <FontAwesomeIcon icon={faHeart} />
 
 const LikeBtn = (props) => {
+
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState
 

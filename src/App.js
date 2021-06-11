@@ -44,6 +44,7 @@ function App() {
             <Route path="/my_profile" render={(rp => gState.token ? <MyProfile /> : <Home />)}/>
             <Route path="/user/:user" render={(rp => gState.token ? <UserProfile {...rp}/> : <Home />)}/>
             <Route path="/create_post" render={(rp => gState.token ? <CreatePost {...rp}/> : <Home />)}/>
+            
           </Switch>
         </main>
       </div>

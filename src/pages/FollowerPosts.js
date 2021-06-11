@@ -93,12 +93,12 @@ const FollowersPosts = () => {
 
     const handleChange = (event) => {
         setUpdate({...update, [event.target.name]: event.target.value})
-        setEditForm(<><input type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"/><button onClick={() => handleUpdate(idVar)}>Submit</button></>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Submit</button></div>)
     }
 
     const beginUpdate = (id, currentNote) => {
         setUpdate({note: currentNote})
-        setEditForm(<><input type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"/><button onClick={() => handleUpdate(id)}>Submit</button></>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(id)}>Submit</button></div>)
         setCurrentID(id)
         idVar = id
     }
@@ -120,7 +120,7 @@ const FollowersPosts = () => {
         .then(() => {getUser()})
         .then(() => window.location.reload())
     }
-    console.log(postsToShow.length)
+    
     return (
         <>
         <h1>Your Feed</h1>
@@ -139,7 +139,7 @@ const FollowersPosts = () => {
                     <> 
                     <hr/> 
                         <section id="post-footer">
-                        {/* The username is the person who liked the post */}
+                        {/* The username attribute is the person who liked the post */}
                         <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} />
                         <div id="edit-delete-btns"> 
                             <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> 
