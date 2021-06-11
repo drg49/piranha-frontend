@@ -67,7 +67,7 @@ const FollowBtn = (props) => {
             <p>Followers: {followData.followers.length}</p>
             <p>Following: {followData.following.length}</p>
         </section>
-        <button onClick={handleFollow}>{buttonTxt}</button>
+        <button id="follow-btn" onClick={handleFollow}>{buttonTxt}</button>
         </>
     )
 }
