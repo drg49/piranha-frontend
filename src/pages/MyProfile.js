@@ -10,11 +10,10 @@ import loading from '../components/Loading.gif'
 const moment = require("moment")
 const postsPerPage = 15;
 let arrayForHoldingPosts = [];
-
 const trash = <FontAwesomeIcon icon={faTrash} />
 const edit = <FontAwesomeIcon icon={faPencilAlt} />
 
-const MyProfile = (props) => {
+const MyProfile = () => {
 
     let history = useHistory()
     const { gState } = useContext(GlobalCtx)
@@ -23,10 +22,12 @@ const MyProfile = (props) => {
     const [next, setNext] = useState(15);
     const [editForm, setEditForm] = useState(null)
     const [currentID, setCurrentID] = useState(null)
-    const [update,setUpdate] = useState({note: ''})
     const [postLength, setPostLength] = useState(null)
     const [currentUser, setCurrentUser] = useState(null)
     const [followData, setFollowData] = useState({followers: [], following: []})
+    const [bio, setBio] = useState(null)
+    const [bioForm, setBioForm] = useState(null)
+    const [bioUpdate, setBioUpdate] = useState(false)
     let idVar; 
 
     const loopWithSlice = (start, end, val) => {
@@ -57,6 +58,7 @@ const MyProfile = (props) => {
         })
         const data = await response.json()
         setCurrentUser(data[0].username)
+        setBio(data[0].bio)
         setFollowData({followers: data[0].followers, following: data[0].following})
     }
 
@@ -98,8 +100,7 @@ const MyProfile = (props) => {
                 "Authorization": "bearer " + token
             },
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(() => {
             getPosts(next, next + postsPerPage);
         })
         .then(() => window.location.reload())
@@ -109,15 +110,13 @@ const MyProfile = (props) => {
         history.push("/create_post")
         window.location.reload()
     }
-
+    //////EDIT POSTS/////
     const handleChange = (event) => {
-        setUpdate({...update, [event.target.name]: event.target.value})
-        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Submit</button></div>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Done</button></div>)
     }
 
     const beginUpdate = (id, currentNote) => {
-        setUpdate({note: currentNote})
-        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button onClick={() => handleUpdate(id)}>Submit</button></div>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button onClick={() => handleUpdate(id)}>Done</button></div>)
         setCurrentID(id)
         idVar = id
     }
@@ -132,14 +131,37 @@ const MyProfile = (props) => {
             },
             body: JSON.stringify({note})
         })
-        .then(response => response.json())
         .then(() => {
             getPosts(next, next + postsPerPage);
         })
         .then(() => {getUser()})
         .then(() => window.location.reload())
     }
+    ///////////////////////
+    //////EDIT BIO/////////
+    const handleBioChange = (event) => {
+        setBioForm(<div edit-bio><textarea id="bio-text" onChange={handleBioChange} value={event.target.value} maxLength="150"></textarea><br /><button id="submit-bio" onClick={handleBioUpdate}>Done</button></div>)
+    }
     
+    const bioUpdateStart = (currentBio) => {
+        setBioUpdate(true)
+        setBioForm(<div edit-bio><textarea id="bio-text" onChange={handleBioChange} value={currentBio} maxLength="150"></textarea><br /><button id="submit-bio" onClick={handleBioUpdate}>Done</button></div>)
+    }
+
+    const handleBioUpdate = () => {
+        const bio = document.getElementById("bio-text").value
+        setBioUpdate(false)
+        fetch(url + "/post/user/bio", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "bearer " + token
+            },
+            body: JSON.stringify({bio})
+        })
+        .then(() => window.location.reload())
+    }
+    ////////////////////////
     return (
         <div>
             {currentUser ? 
@@ -148,6 +170,13 @@ const MyProfile = (props) => {
                 <h1 id="user-title">{currentUser}</h1>
                 <LogoutBtn />
             </nav>
+            <section id="bio">
+                { bioUpdate === true ? bioForm :
+                <>
+                {bio}
+                <div id="edit-bio-btn" title="Edit Bio" onClick={() => bioUpdateStart(bio)}>{edit}</div>
+                </> }
+            </section>
             <FollowData followData={followData} currentUser={currentUser}/> 
             <button id="create-btn" onClick={goToCreate}>Create Post</button>
             <h3>My Posts</h3>
