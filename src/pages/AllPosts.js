@@ -1,12 +1,10 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { GlobalCtx } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import LikeBtn from '../components/LikeBtn'
 import loading from '../components/Loading.gif'
-import defaultIMG from '../components/def-img.jpg'
-
 const moment = require('moment')
 const postsPerPage = 15;
 let arrayForHoldingPosts = [];
@@ -145,7 +143,6 @@ const AllPosts = () => {
             </section>
         </>
     )
-
 }
 
 export default AllPosts
