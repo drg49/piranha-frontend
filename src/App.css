@@ -114,8 +114,6 @@ img {
   background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(234,249,249,0.67) 0.1%, rgba(239,249,251,0.63) 90.1% );
   max-height: 415px;
   object-fit: contain;
-  /* border-top: 1px solid whitesmoke; */
-  /* border-bottom: 1px solid whitesmoke; */
   -webkit-touch-callout: none; 
   -webkit-user-select: none; 
   -khtml-user-select: none; 
@@ -136,8 +134,8 @@ img {
 hr {
   border: none;
   height: 1px;
-  color: #333; /* old IE */
-  background-color: #333; /* Modern Browsers */
+  color: black; /* old IE */
+  background-color: black; /* Modern Browsers */
   margin: 0px;
 }
 
@@ -323,34 +321,6 @@ form input:last-of-type {
   width: 100px;
 }
 
-.custom-file-input::-webkit-file-upload-button {
-  visibility: hidden;
-  margin-top: 20px;
-}
-
-.custom-file-input::before {
-  content: 'Select image file';
-  display: block;
-  margin-top: 20px;
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 74px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-  font-size: 10pt;
-}
-.custom-file-input:hover::before {
-  border-color: black;
-}
-.custom-file-input:active::before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
-
 #upload-btn {
   padding: 10px 14px;
   background-color: rgb(54, 164, 32);
@@ -533,26 +503,10 @@ textarea {
 }
 /* /////////////////////////////////////////// */
 
-/* RESPONSIVE DESIGN //////////////////////////*/
-
-@media screen and (max-width: 1024px) {
-  .custom-file-input::before {
-    margin-top: 40px;
-    margin-bottom: -30px;
-    padding: 5px 70px;
-  }
-}
-
-@media screen and (max-width: 595px) {
-  img {
-    width: 100%;
-  }
-}
-
-
-
+/* Input file type */
 
 .file {
+  margin-top: 40px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -611,3 +565,9 @@ textarea {
 }
 
 
+/* RESPONSIVE DESIGN //////////////////////////*/
+@media screen and (max-width: 595px) {
+  img {
+    width: 100%;
+  }
+}
