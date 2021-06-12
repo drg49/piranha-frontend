@@ -85,7 +85,7 @@ const SearchPage = () => {
 
     return (
         <>
-            <input type="text" onChange={handleChange} onKeyDown={preventSpace} id="search-field"/>
+            <input type="text" onChange={handleChange} onKeyDown={preventSpace} id="search-field" maxLength="15" placeholder="Search for username..."/>
             <section id="follow-list">
                 {results ? results: null}
             </section>
