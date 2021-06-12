@@ -458,10 +458,13 @@ textarea {
 
 #follow-list {
   border: 1px solid black;
+  background-color: white;
   max-width: 420px;
   margin: auto;
   height: 400px;
   overflow: auto;
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
 }
 
 #follow-list li {
@@ -473,9 +476,14 @@ textarea {
 }
 
 #follow-list li:hover {
-  background-color: rgb(219, 219, 219);
+  background-color: rgb(228, 228, 228);
 }
 
 #followers-title {
   margin-top: 0px;
+}
+
+/* SEARCH PAGE */
+#search-field {
+  margin-bottom: 22px;
 }

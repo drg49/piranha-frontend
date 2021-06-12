@@ -23,23 +23,26 @@ const Signup = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         const {username, password, email} = form
-
-        fetch(`${url}/auth/signup`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({username, password, email})
-        })
-        .then(response => response.json())
-        .then(data => {
-            setForm(blank)
-            if(data.error){
-                setErrorText("There is already an account with that username. Please choose another one.")
-            } else {
-                props.history.push("/login")
-            }
-        })
+        if (form.username.includes(" ")){
+            setErrorText("Username cannot have spaces")
+        } else {
+            fetch(`${url}/auth/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({username, password, email})
+            })
+            .then(response => response.json())
+            .then(data => {
+                setForm(blank)
+                if(data.error){
+                    setErrorText("There is already an account with that username. Please choose another one.")
+                } else {
+                    props.history.push("/login")
+                }
+            })
+        }
     }
 
     const preventSpace = (e) => {
