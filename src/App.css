@@ -42,6 +42,7 @@ a {
   width: 38px;
   height: 38px;
   transform: scaleX(-1);
+  background: none;
 }
 
 #see-more-btn {
