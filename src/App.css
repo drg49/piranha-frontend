@@ -592,4 +592,13 @@ textarea {
   img {
     width: 100%;
   }
+
+  #post {
+    width: 100%;
+    border-radius: 0px;
+    border-left: none;
+    border-right: none;
+    margin-bottom: 25px;
+  }
+
 }
