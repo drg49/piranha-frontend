@@ -537,9 +537,9 @@ textarea {
 
 @media screen and (max-width: 1024px) {
   .custom-file-input::before {
-    margin-top: 60px;
-    /* margin-bottom: -30px; */
-    padding: 50px 70px;
+    margin-top: 40px;
+    margin-bottom: -20px;
+    padding: 5px 70px;
   }
 }
 
