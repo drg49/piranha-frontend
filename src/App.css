@@ -331,6 +331,7 @@ form input:last-of-type {
 .custom-file-input::before {
   content: 'Select image file';
   display: block;
+  margin-top: 20px;
   background: linear-gradient(top, #f9f9f9, #e3e3e3);
   border: 1px solid #999;
   border-radius: 3px;
@@ -534,11 +535,15 @@ textarea {
 
 /* RESPONSIVE DESIGN //////////////////////////*/
 
+@media screen and (max-width: 1024px) {
+  .custom-file-input::before {
+    margin-bottom: 20px;
+    padding: 5px 70px;
+  }
+}
 
 @media screen and (max-width: 595px) {
   img {
     width: 100%;
   }
-
-  
 }
