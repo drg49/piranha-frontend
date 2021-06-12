@@ -184,11 +184,7 @@ hr {
 #like-icon {
   margin-left: 12px;
   font-size: 22px;
-}
-
-#like-icon:hover {
   cursor: pointer;
-  opacity: 91%;
 }
 
 #just-like-btn {
