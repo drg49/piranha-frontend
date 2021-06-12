@@ -187,6 +187,10 @@ hr {
   cursor: pointer;
 }
 
+#like-icon:hover {
+  opacity: 0.9;
+}
+
 #just-like-btn {
   text-align: left;
 }
