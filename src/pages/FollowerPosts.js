@@ -23,7 +23,6 @@ const FollowersPosts = () => {
     const [next, setNext] = useState(15);
     const [editForm, setEditForm] = useState(null)
     const [currentID, setCurrentID] = useState(null)
-    const [update,setUpdate] = useState({note: ''})
     const [postLength, setPostLength] = useState(null)
     const [currentFollowers, setCurrentFollowers] = useState(null) //see if the user is following anyone to display a message.
     let idVar; 
@@ -84,7 +83,6 @@ const FollowersPosts = () => {
                 "Authorization": "bearer " + token
             },
         })
-        .then(response => response.json())
         .then(() => {
             getFollowingPosts(followers, next, next + postsPerPage);
         })
@@ -92,13 +90,11 @@ const FollowersPosts = () => {
     }
 
     const handleChange = (event) => {
-        setUpdate({...update, [event.target.name]: event.target.value})
-        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Submit</button></div>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Done</button></div>)
     }
 
     const beginUpdate = (id, currentNote) => {
-        setUpdate({note: currentNote})
-        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(id)}>Submit</button></div>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(id)}>Done</button></div>)
         setCurrentID(id)
         idVar = id
     }
@@ -113,7 +109,6 @@ const FollowersPosts = () => {
             },
             body: JSON.stringify({note})
         })
-        .then(response => response.json())
         .then(() => {
             getFollowingPosts(followers, next, next + postsPerPage);
         })

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { GlobalCtx } from '../App'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import LikeBtn from '../components/LikeBtn'
 import loading from '../components/Loading.gif'
 const moment = require('moment')
@@ -20,9 +20,26 @@ const AllPosts = () => {
     const [next, setNext] = useState(15);
     const [editForm, setEditForm] = useState(null)
     const [currentID, setCurrentID] = useState(null)
-    const [update,setUpdate] = useState({note: ''})
     const [postLength, setPostLength] = useState(null)
     let idVar; 
+    let history = useHistory()
+    const [ locationKeys, setLocationKeys ] = useState([]) //Prevent bugs on browser back/forward button
+    useEffect(() => {
+      return history.listen(location => {
+        if (history.action === 'PUSH') {
+          setLocationKeys([ location.key ])
+        }
+        if (history.action === 'POP') {
+          if (locationKeys[1] === location.key) {
+            setLocationKeys(([ _, ...keys ]) => keys)
+            window.location.reload()
+          } else {
+            setLocationKeys((keys) => [ location.key, ...keys ])
+            window.location.reload()
+          }
+        }
+      })
+    }, [ locationKeys, ])
 
     const loopWithSlice = (start, end, val) => {
         const slicedPosts = val.slice(start, end)
@@ -73,7 +90,6 @@ const AllPosts = () => {
                 "Authorization": "bearer " + token
             },
         })
-        .then(response => response.json())
         .then(() => {
             getAllPosts(next, next + postsPerPage);
         })
@@ -81,13 +97,11 @@ const AllPosts = () => {
     }
 
     const handleChange = (event) => {
-        setUpdate({...update, [event.target.name]: event.target.value})
-        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Submit</button></div>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={event.target.value} name="note" maxLength="350"></textarea><br /><button id="upload-btn" onClick={() => handleUpdate(idVar)}>Done</button></div>)
     }
 
     const beginUpdate = (id, currentNote) => {
-        setUpdate({note: currentNote})
-        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button onClick={() => handleUpdate(id)}>Submit</button></div>)
+        setEditForm(<div id="create-caption"><textarea type="text" onChange={handleChange} id="update" value={currentNote} name="note" maxLength="350"></textarea><br /><button onClick={() => handleUpdate(id)}>Done</button></div>)
         setCurrentID(id)
         idVar = id
     }
@@ -102,7 +116,6 @@ const AllPosts = () => {
             },
             body: JSON.stringify({note})
         })
-        .then(response => response.json())
         .then(() => {
             getAllPosts(next, next + postsPerPage);
         })

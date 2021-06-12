@@ -111,6 +111,7 @@ textarea
 
 img {
   width: 595px;
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(234,249,249,0.67) 0.1%, rgba(239,249,251,0.63) 90.1% );
   max-height: 415px;
   object-fit: contain;
   border-top: 1px solid black;
@@ -329,11 +330,11 @@ form input:last-of-type {
 
 .custom-file-input::before {
   content: 'Select image file';
-  display: inline-block;
+  display: block;
   background: linear-gradient(top, #f9f9f9, #e3e3e3);
   border: 1px solid #999;
   border-radius: 3px;
-  padding: 5px 8px;
+  padding: 5px 74px;
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
@@ -367,6 +368,7 @@ form input:last-of-type {
   width: fit-content;
   margin: auto;
   text-align: right;
+  padding: 0px 10px;
 }
 
 textarea {
@@ -417,7 +419,12 @@ textarea {
   justify-content: start;
   max-width: 595px;
   margin: auto;
+  margin-top: 11px;
   padding: 0px 10px;
+}
+
+#follow-data p {
+  margin-top: 0px;
 }
 
 #follow-data p:first-of-type {
@@ -432,6 +439,33 @@ textarea {
 
 #user-title {
   margin-bottom: 0;
+}
+
+#bio {
+  max-width: 595px;
+  padding: 10px 10px 3px 10px;
+  margin: auto;
+  text-align: left;
+}
+
+#edit-bio-btn {
+  display: inline-block;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  padding:  8px 11px;
+  color:rgb(47, 47, 47);
+  transition: 280ms;
+}
+
+#edit-bio-btn:hover {
+  cursor: pointer;
+  /* opacity: 0.78; */
+  background: lightgray;
+}
+
+#edit-bio {
+  padding: 0px 10px;
 }
 
 /* USER PROFILE PAGE ///////////////////////// */
@@ -459,7 +493,7 @@ textarea {
 
 /* /////////////////////////////////////////// */
 
-/* Followers/Following Page Styling */
+/* Followers/Following Page Styling ///////////*/
 
 #follow-list {
   border: 1px solid black;
@@ -495,4 +529,16 @@ textarea {
   padding: 4px;
   border: 1px solid rgb(98, 98, 98);
   border-radius: 6px;
+}
+/* /////////////////////////////////////////// */
+
+/* RESPONSIVE DESIGN //////////////////////////*/
+
+
+@media screen and (max-width: 595px) {
+  img {
+    width: 100%;
+  }
+
+  
 }
