@@ -338,6 +338,7 @@ form input:last-of-type {
 #create-caption {
   width: fit-content;
   margin: auto;
+  margin-bottom: 25px;
   text-align: right;
   padding: 0px 10px;
 }

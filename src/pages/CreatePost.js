@@ -6,6 +6,14 @@ const CreatePost = () => {
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState
 
+    const [input, setInput] = useState(
+      <div class='file file--upload'>
+      <label for='input-file'>
+      <i class="material-icons"></i>Upload
+      </label>
+      <input id='input-file' type='file' onChange={(e) => {uploadImage(e)}} />
+      </div>
+    )
     const [upload, setUpload] = useState(null)
     const [img, setImg] = useState(null)
     const [caption, setCaption] = useState(null)
@@ -17,6 +25,7 @@ const CreatePost = () => {
       base64 = await convertBase64(file);
       const str = base64
       if (str.charAt(5) + str.charAt(6) + str.charAt(7) + str.charAt(8) + str.charAt(9) === "image") {
+        setInput(null)
       setImg(<img src={base64} alt="Your post" id="uploaded-img"/>)
       setCaption(<><textarea type="text" id="cap" placeholder="Add a caption..."/><br /></>)
       setUpload(<button onClick={handleCreate} id="upload-btn">Post</button>)
@@ -78,23 +87,16 @@ const CreatePost = () => {
     }, [ locationKeys, ])
 
     return (
-        <div className="App">
-          <div class='file file--upload'>
-      <label for='input-file'>
-        <i class="material-icons"></i>Upload
-      </label>
-      <input id='input-file' type='file' onChange={(e) => {uploadImage(e)}} />
-    </div>
-            {/* <input type="file" onChange={(e) => {uploadImage(e)}} className="custom-file-input"></input> */}
-
-            <br />
-              {img}
-            <br/>
-            <div id="create-caption">
-              {caption}
-              {upload}
-            </div>
+      <div className="App">
+        {input}
+        <br />
+        {img}
+        <br/>
+        <div id="create-caption">
+          {caption}
+          {upload}
         </div>
+      </div>
     )
 }
 
