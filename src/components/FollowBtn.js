@@ -29,16 +29,11 @@ const FollowBtn = (props) => {
             setIsFollowing(true)
             setButtonTxt("Unfollow")
             addFollower(currentUser, user)
-            props.getUserAcct()
-            if(currentUserLength === 0) {
-                window.location.reload()
-            }
         }
         if (isFollowing === true) {
             setIsFollowing(false)
             setButtonTxt("Follow")
             removeFollower(currentUser, user)
-            window.location.reload()
         }
     }
 
@@ -50,6 +45,7 @@ const FollowBtn = (props) => {
                 "Authorization": "bearer " + token
             }
         })
+        .then(() => window.location.reload())
     }
 
     const removeFollower = (currentUser, user) => {
@@ -60,6 +56,7 @@ const FollowBtn = (props) => {
                 "Authorization": "bearer " + token
             }
         })
+        .then(() => window.location.reload())
     }
 
     let history = useHistory()
