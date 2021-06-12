@@ -19,6 +19,7 @@ const UserProfile = (props) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [currentUserProfile, setCurrentUserProfile] = useState(null)
     const [followData, setFollowData] = useState({followers: [], following: []})
+    const [bio, setBio] = useState(null)
 
     const loopWithSlice = (start, end, val) => {
         const slicedPosts = val.slice(start, end)
@@ -47,6 +48,7 @@ const UserProfile = (props) => {
         })
         const data = await response.json()
         setFollowData({followers: data.followers, following: data.following})
+        setBio(data.bio)
     }
 
     //Gets the current user, NOT the user profile
@@ -98,7 +100,8 @@ const UserProfile = (props) => {
     return (
         <div>
             <h1 id="user-title">{username}</h1>
-            {currentUserProfile ? <FollowBtn currentUser={currentUser} user={username} following={currentUserProfile.following.includes(username)} followData={followData} getUserAcct={getUserAccount} currentUserLength={currentUserProfile.following.length} /> : null}
+            <div id="user-bio">{bio}</div>
+            {currentUserProfile ? <FollowBtn currentUser={currentUser} user={username} following={currentUserProfile.following.includes(username)} followData={followData} currentUserLength={currentUserProfile.following.length} /> : null}
             <section id="post-board">
                 {postsToShow.length > 0 ? postsToShow.map((post) => {
                     return (

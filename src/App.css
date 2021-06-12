@@ -437,7 +437,22 @@ textarea {
 }
 
 #edit-bio {
-  padding: 0px 10px;
+  width: fit-content;
+  text-align: right;
+}
+
+#submit-bio {
+  outline: none;
+  cursor: pointer;
+  background-color: rgb(22, 111, 229);
+  color: white;
+  border: none;
+  padding: 5px 7px;
+  border-radius: 3px;
+}
+
+#submit-bio:hover {
+  opacity: 0.9;
 }
 
 /* USER PROFILE PAGE ///////////////////////// */
@@ -461,6 +476,12 @@ textarea {
 #follow-btn:hover {
   cursor: pointer;
   background-color: rgba(22, 111, 229, 0.85);
+}
+
+#user-bio {
+  max-width: 595px;
+  margin: auto;
+  margin-top: 15px;
 }
 
 /* /////////////////////////////////////////// */

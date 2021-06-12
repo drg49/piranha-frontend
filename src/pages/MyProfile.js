@@ -140,12 +140,12 @@ const MyProfile = () => {
     ///////////////////////
     //////EDIT BIO/////////
     const handleBioChange = (event) => {
-        setBioForm(<div edit-bio><textarea id="bio-text" onChange={handleBioChange} value={event.target.value} maxLength="150"></textarea><br /><button id="submit-bio" onClick={handleBioUpdate}>Done</button></div>)
+        setBioForm(<div id="edit-bio"><textarea id="bio-text" onChange={handleBioChange} value={event.target.value} maxLength="150"></textarea><br /><button id="submit-bio" onClick={handleBioUpdate}>Done</button></div>)
     }
     
     const bioUpdateStart = (currentBio) => {
         setBioUpdate(true)
-        setBioForm(<div edit-bio><textarea id="bio-text" onChange={handleBioChange} value={currentBio} maxLength="150"></textarea><br /><button id="submit-bio" onClick={handleBioUpdate}>Done</button></div>)
+        setBioForm(<div id="edit-bio"><textarea id="bio-text" onChange={handleBioChange} value={currentBio} maxLength="150"></textarea><br /><button id="submit-bio" onClick={handleBioUpdate}>Done</button></div>)
     }
 
     const handleBioUpdate = () => {

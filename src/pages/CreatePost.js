@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import {useHistory} from 'react-router-dom'
 import { GlobalCtx } from '../App'
+import loadGif from '../components/Loading.gif'
 
 const CreatePost = () => {
     const { gState } = useContext(GlobalCtx)
@@ -17,6 +18,7 @@ const CreatePost = () => {
     const [upload, setUpload] = useState(null)
     const [img, setImg] = useState(null)
     const [caption, setCaption] = useState(null)
+    const [loading, setLoading] = useState(null)
     let history = useHistory() 
     let base64;
 
@@ -52,9 +54,9 @@ const CreatePost = () => {
     }
 
     const handleCreate = () => {
-      if (base64 === undefined) {
-        console.log("Please choose a file")
-      } else {
+        setUpload(null)
+        setCaption(null)
+        setLoading(<img id="load-gif" src={loadGif} alt="Loading"/>)
         const note = document.getElementById("cap").value
         fetch(url + "/post/", {
           method: "post",
@@ -65,7 +67,6 @@ const CreatePost = () => {
           body: JSON.stringify({image: base64, note: note})
       })
       .then(() => {history.push("/home")})
-      }
     }
 
     const [ locationKeys, setLocationKeys ] = useState([]) //Prevent bugs on browser back/forward button
@@ -95,6 +96,7 @@ const CreatePost = () => {
         <div id="create-caption">
           {caption}
           {upload}
+          {loading}
         </div>
       </div>
     )
