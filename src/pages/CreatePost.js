@@ -19,7 +19,7 @@ const CreatePost = () => {
       if (str.charAt(5) + str.charAt(6) + str.charAt(7) + str.charAt(8) + str.charAt(9) === "image") {
       setImg(<img src={base64} alt="Your post" id="uploaded-img"/>)
       setCaption(<><textarea type="text" id="cap" placeholder="Add a caption..."/><br /></>)
-      setUpload(<button onClick={handleCreate} id="upload-btn">Upload</button>)
+      setUpload(<button onClick={handleCreate} id="upload-btn">Post</button>)
       } else {
         setImg(<p>Please select an image file</p>)
         setCaption(null)
@@ -79,7 +79,14 @@ const CreatePost = () => {
 
     return (
         <div className="App">
-            <input type="file" onChange={(e) => {uploadImage(e)}} className="custom-file-input"></input>
+          <div class='file file--upload'>
+      <label for='input-file'>
+        <i class="material-icons"></i>Upload
+      </label>
+      <input id='input-file' type='file' onChange={(e) => {uploadImage(e)}} />
+    </div>
+            {/* <input type="file" onChange={(e) => {uploadImage(e)}} className="custom-file-input"></input> */}
+
             <br />
               {img}
             <br/>
