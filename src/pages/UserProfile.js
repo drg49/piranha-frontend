@@ -110,7 +110,7 @@ const UserProfile = (props) => {
                                 <h2>{post.username}</h2>
                                 <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                             </section>
-                            <img src={post.image} alt={`Post by ${post.username}`}/>
+                            {/* <img src={post.image} alt={`Post by ${post.username}`}/> */}
                             <h3 id="post-note">{post.note}</h3>
                             <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>
                         </div>

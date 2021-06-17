@@ -7,36 +7,36 @@ const CreatePost = () => {
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState
 
-    const [input, setInput] = useState(
-      <div class='file file--upload'>
-      <label for='input-file'>
-      <i class="material-icons"></i>Upload
-      </label>
-      <input id='input-file' type='file' onChange={(e) => {uploadImage(e)}} />
-      </div>
-    )
-    const [upload, setUpload] = useState(null)
-    const [img, setImg] = useState(null)
-    const [caption, setCaption] = useState(null)
+    // const [input, setInput] = useState(
+    //   <div class='file file--upload'>
+    //   <label for='input-file'>
+    //   <i class="material-icons"></i>Upload
+    //   </label>
+    //   <input id='input-file' type='file' onChange={(e) => {uploadImage(e)}} />
+    //   </div>
+    // )
+    // const [upload, setUpload] = useState(null)
+    // const [img, setImg] = useState(null)
+    // const [caption, setCaption] = useState(null)
     const [loading, setLoading] = useState(null)
     let history = useHistory() 
-    let base64;
+    // let base64;
 
-    const uploadImage = async (e) => {
-      const file = e.target.files[0];
-      base64 = await convertBase64(file);
-      const str = base64
-      if (str.charAt(5) + str.charAt(6) + str.charAt(7) + str.charAt(8) + str.charAt(9) === "image") {
-        setInput(null)
-      setImg(<img src={base64} alt="Your post" id="uploaded-img"/>)
-      setCaption(<><textarea type="text" id="cap" placeholder="Add a caption..."/><br /></>)
-      setUpload(<button onClick={handleCreate} id="upload-btn">Post</button>)
-      } else {
-        setImg(<p>Please select an image file</p>)
-        setCaption(null)
-        setUpload(null)
-      }
-    }
+    // const uploadImage = async (e) => {
+    //   const file = e.target.files[0];
+    //   base64 = await convertBase64(file);
+    //   const str = base64
+    //   if (str.charAt(5) + str.charAt(6) + str.charAt(7) + str.charAt(8) + str.charAt(9) === "image") {
+    //     setInput(null)
+    //   setImg(<img src={base64} alt="Your post" id="uploaded-img"/>)
+    //   setCaption(<><textarea type="text" id="cap" placeholder="Add a caption..."/><br /></>)
+    //   setUpload(<button onClick={handleCreate} id="upload-btn">Post</button>)
+    //   } else {
+    //     setImg(<p>Please select an image file</p>)
+    //     setCaption(null)
+    //     setUpload(null)
+    //   }
+    // }
 
     const convertBase64 = (file) => {
       return new Promise((resolve, reject) => {
@@ -54,8 +54,8 @@ const CreatePost = () => {
     }
 
     const handleCreate = () => {
-        setUpload(null)
-        setCaption(null)
+        // setUpload(null)
+        // setCaption(null)
         setLoading(<img id="load-gif" src={loadGif} alt="Loading"/>)
         const note = document.getElementById("cap").value
         fetch(url + "/post/", {
@@ -64,7 +64,7 @@ const CreatePost = () => {
               "Content-Type": "application/json",
               "Authorization": "bearer " + token
           },
-          body: JSON.stringify({image: base64, note: note})
+          body: JSON.stringify({note: note})
       })
       .then(() => {history.push("/home")})
     }
@@ -89,13 +89,15 @@ const CreatePost = () => {
 
     return (
       <div className="App">
-        {input}
+        {/* {input} */}
         <br />
-        {img}
+        {/* {img} */}
         <br/>
         <div id="create-caption">
-          {caption}
-          {upload}
+          {/* {caption}
+          {upload} */}
+          <><textarea type="text" id="cap" placeholder="Add a caption..."/><br /></>
+          <button onClick={handleCreate} id="upload-btn">Post</button>
           {loading}
         </div>
       </div>

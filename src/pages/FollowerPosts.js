@@ -127,7 +127,7 @@ const FollowersPosts = () => {
                         {currentUser === post.username ? <Link to="/my_profile"><h2>{post.username}</h2></Link> : <Link to={`/user/${post.username}`}><h2>{post.username}</h2></Link>}
                         <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                     </section>
-                    <img src={post.image} alt={`Post from ${post.username}`}/>
+                    {/* <img src={post.image} alt={`Post from ${post.username}`}/> */}
                     <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
                     {/* If the current user is equal to the post username, then add a delete and edit button! */}
                     {currentUser === post.username ? 
