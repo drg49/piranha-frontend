@@ -17,6 +17,10 @@ a {
   text-decoration: none;
 }
 
+input[type=submit] {
+  -webkit-appearance: none;
+}
+
 #app-title {
   display: flex;
   margin: auto;
