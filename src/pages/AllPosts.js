@@ -13,9 +13,11 @@ const trash = <FontAwesomeIcon icon={faTrash} />
 const edit = <FontAwesomeIcon icon={faPencilAlt} />
 
 const AllPosts = () => {
+
+    const currentUser = localStorage.getItem("user")
+
     const { gState } = useContext(GlobalCtx)
     const { url, token } = gState
-    const [currentUser, setCurrentUser] = useState(null)
     const [postsToShow, setPostsToShow] = useState([]);
     const [next, setNext] = useState(15);
     const [editForm, setEditForm] = useState(null)
@@ -58,24 +60,9 @@ const AllPosts = () => {
         setPostLength(data.length)
         loopWithSlice(a, b, data.reverse())
     }
-    // We are going to grab the current user so we can add delete/edit buttons to only their posts.
-    const getUser = async () => {
-        const response = await fetch(url + "/post/logged_in_user/", {
-            method: "GET",
-            headers: {
-                Authorization: "bearer " + token
-            }
-        })
-        const data = await response.json()
-        setCurrentUser(data[0].username)
-    }
     
     useEffect(() => {
-        async function fetchData() {
-            await getUser()
-            getAllPosts(0, postsPerPage)
-        }
-        fetchData()
+        getAllPosts(0, postsPerPage)
     }, [])
 
     const handleShowMorePosts = () => {
@@ -119,7 +106,6 @@ const AllPosts = () => {
         .then(() => {
             getAllPosts(next, next + postsPerPage);
         })
-        .then(() => {getUser()})
         .then(() => window.location.reload())
     }
     
@@ -134,7 +120,7 @@ const AllPosts = () => {
                             {currentUser === post.username ? <Link to="/my_profile"><h2>{post.username}</h2></Link> : <Link to={`/user/${post.username}`}><h2>{post.username}</h2></Link>}
                             <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                         </section>
-                        {/* <img src={post.image} alt={`Post from ${post.username}`}/> */}
+                        <img src={`https://drg-s3-2.s3.amazonaws.com/${post.image}`} alt={`Post from ${post.username}`}/>
                         <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
                         {/* If the current user is equal to the post username, then add a delete and edit button! */}
                         {currentUser === post.username ? 
@@ -145,7 +131,7 @@ const AllPosts = () => {
                             <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} />
                             <div id="edit-delete-btns"> 
                                 <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> 
-                                <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> 
+                                <button title="Delete" onClick={() => handleDelete(post.image)}>{trash}</button> 
                             </div>
                             </section> 
                         </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>}

@@ -19,7 +19,7 @@ export const GlobalCtx = createContext(null)
 function App() {
 
   const [gState, setGState] = useState({
-    url: "https://new-piranha.herokuapp.com", //change this to the Heroku link when you get the Heroku link.
+    url: "https://new-piranha.herokuapp.com", 
     token: null
   })
 

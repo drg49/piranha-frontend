@@ -127,7 +127,7 @@ const FollowersPosts = () => {
                         {currentUser === post.username ? <Link to="/my_profile"><h2>{post.username}</h2></Link> : <Link to={`/user/${post.username}`}><h2>{post.username}</h2></Link>}
                         <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                     </section>
-                    {/* <img src={post.image} alt={`Post from ${post.username}`}/> */}
+                    <img src={`https://drg-s3-2.s3.amazonaws.com/${post.image}`} alt={`Post from ${post.username}`}/>
                     <h3 id="post-note">{editForm && currentUser === post.username && currentID === post._id ? editForm : post.note}</h3>
                     {/* If the current user is equal to the post username, then add a delete and edit button! */}
                     {currentUser === post.username ? 
@@ -138,7 +138,7 @@ const FollowersPosts = () => {
                         <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} />
                         <div id="edit-delete-btns"> 
                             <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button> 
-                            <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button> 
+                            <button title="Delete" onClick={() => handleDelete(post.image)}>{trash}</button> 
                         </div>
                         </section> 
                     </> :<><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>}

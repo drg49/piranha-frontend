@@ -60,6 +60,7 @@ const UserProfile = (props) => {
             }
         })
         const data = await response.json()
+        console.log(data[0])
         setCurrentUserProfile(data[0]) //this is what you will grab to put in the currentUser param in the followbtn page (first param)
         setCurrentUser(data[0].username)
     }
@@ -110,7 +111,7 @@ const UserProfile = (props) => {
                                 <h2>{post.username}</h2>
                                 <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                             </section>
-                            {/* <img src={post.image} alt={`Post by ${post.username}`}/> */}
+                            <img src={`https://drg-s3-2.s3.amazonaws.com/${post.image}`} alt={`Post by ${post.username}`}/>
                             <h3 id="post-note">{post.note}</h3>
                             <><hr /><div id="just-like-btn"><LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} /></div></>
                         </div>

@@ -1,4 +1,3 @@
-import { registerPlugin } from 'axe-core'
 import { useContext, useState } from 'react'
 import {Link} from 'react-router-dom'
 import { GlobalCtx } from '../App'
@@ -48,10 +47,11 @@ const Login = (props) => {
                 setRegister(<><p>Dont have an account?</p><Link to="/signup"><p id="margin-space">Register</p></Link></>)
             } else {
             localStorage.setItem("token", JSON.stringify(data))
+            localStorage.setItem("user", data.username)
             setGState({...gState, token: data.token})
             setForm(blank) //reset the form
             props.history.push("/")
-            window.location.reload()
+            // window.location.reload()
             }
         })
     }
