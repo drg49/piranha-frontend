@@ -13,6 +13,8 @@ const Followers = (props) => {
     const name = props.match.params.name
     const num = props.match.params.num
 
+  const currentUser = localStorage.getItem("user")
+
     const getFollowers = async () => {
       const response = await fetch(url + "/post/useraccount/" + username, {
         method: "GET",
@@ -37,7 +39,7 @@ const Followers = (props) => {
             <h2 id="followers-title">{name}</h2>
             <section id="follow-list">
                 {followData ? followData.map((item, index) => {
-                  return <Link to={`/user/${item}`}><li key={index}>{item}</li></Link>
+                  return <Link to={currentUser === item ? `/my_profile` : `/user/${item}`} key={index}><li>{item}</li></Link>
                 }) : null }
             </section>
         </>

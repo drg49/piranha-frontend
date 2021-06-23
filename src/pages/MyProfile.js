@@ -189,14 +189,14 @@ const MyProfile = () => {
                                 <h2>{post.username}</h2>
                                 <h3>{moment(post.createdAt).format('MM-DD-YYYY')}</h3>
                             </section>
-                            {/* <img src={post.image} alt="Post created by you"/> */}
+                            <img src={`https://drg-s3-2.s3.amazonaws.com/${post.image}`} alt="Post created by you"/>
                             <h3 id="post-note">{currentID === post._id ? editForm : post.note}</h3>
                             <hr/>
                             <section id="post-footer">
                             <LikeBtn postID={post._id} username={currentUser} liked={post.likes.includes(currentUser)} likesArray={post.likes} />
                             <div id="edit-delete-btns">
                                 <button id="edit-btn" title="Edit" onClick={() => beginUpdate(post._id, post.note)}>{edit}</button>
-                                <button title="Delete" onClick={() => handleDelete(post._id)}>{trash}</button>
+                                <button title="Delete" onClick={() => handleDelete(post.image)}>{trash}</button>
                             </div>
                             </section>
                         </div>

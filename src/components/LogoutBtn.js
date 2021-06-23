@@ -11,7 +11,7 @@ const LogoutBtn = () => {
     const {gState, setGState} = useContext(GlobalCtx)
 
     const logout = (<Link><h3 className="header-btn" id="logout" onClick={() => {
-        localStorage.removeItem("token")
+        localStorage.clear()
         setGState({...gState, token: null})
     }}>Logout {leave}</h3></Link>)
 
