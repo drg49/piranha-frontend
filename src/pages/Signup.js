@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import {Link} from 'react-router-dom'
 import { GlobalCtx } from "../App"
+import loadGif from '../components/Loading.gif'
 
 const Signup = (props) => {
 
@@ -15,6 +16,7 @@ const Signup = (props) => {
 
     const [form, setForm] = useState(blank)
     const [errorText, setErrorText] = useState("")
+    const [submit, setSubmit] = useState(<input type="submit" value="Sign Up" id="create-account"/>)
 
     const handleChange = (event) => {
         setForm({...form, [event.target.name]: event.target.value})
@@ -26,6 +28,7 @@ const Signup = (props) => {
         if (form.username.includes(" ")){
             setErrorText("Username cannot have spaces")
         } else {
+            setSubmit(<img id="load-gif" src={loadGif} alt="loading" />)
             fetch(`${url}/auth/signup`, {
                 method: "POST",
                 headers: {
@@ -38,6 +41,7 @@ const Signup = (props) => {
                 setForm(blank)
                 if(data.error){
                     setErrorText("There is already an account with that username. Please choose another one.")
+                    setSubmit(<input type="submit" value="Sign Up" id="create-account"/>)
                 } else {
                     props.history.push("/login")
                 }
@@ -59,7 +63,7 @@ const Signup = (props) => {
                 <input type="text" name="username" value={form.username} onChange={handleChange} placeholder="Username" onKeyDown={preventSpace} minLength="3" maxLength="15" required/>
                 <input type="password" name="password" value={form.password} onChange={handleChange} placeholder="Password" minLength="3" maxLength="30" required/>
                 <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email (optional)" maxLength="256"/>
-                <input type="submit" value="Sign Up" id="create-account"/>
+                {submit}
             </form>
         </section>
         <div id="form-bottom">
