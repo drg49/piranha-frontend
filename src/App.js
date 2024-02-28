@@ -19,7 +19,7 @@ export const GlobalCtx = createContext(null)
 function App() {
 
   const [gState, setGState] = useState({
-    url: "https://new-piranha.herokuapp.com" /*"http://localhost:4000"*/, 
+    url: "https://piranha-app.onrender.com", /*"http://localhost:4000",*/
     token: null
   })
 
