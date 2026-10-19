@@ -4,7 +4,7 @@ import { GlobalCtx } from '../App';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import LikeBtn from '../components/LikeBtn';
-import loading from '../components/Loading.gif';
+import Spinner from '../components/Spinner';
 
 const moment = require('moment');
 
@@ -228,7 +228,9 @@ const FollowersPosts = () => {
             );
           })
         ) : currentFollowers === 0 ? null : (
-          <img id="load-gif" src={loading} alt="Loading" />
+          <div className="loading-state">
+            <Spinner />
+          </div>
         )}
       </section>
       {postLength !== postsToShow.length && postLength > 15 ? (

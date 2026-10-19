@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import FollowData from '../components/FollowData';
 import LogoutBtn from '../components/LogoutBtn';
-import loading from '../components/Loading.gif';
+import Spinner from '../components/Spinner';
 const moment = require('moment');
 const postsPerPage = 15;
 let arrayForHoldingPosts = [];
@@ -297,10 +297,10 @@ const MyProfile = () => {
             );
           })
         ) : postsToShow.length === 0 ? null : (
-          <>
-            <img id="load-gif" src={loading} alt="Loading" />
+          <div className="loading-state">
+            <Spinner />
             <p>Please wait while we grab your data</p>
-          </>
+          </div>
         )}
       </section>
       {postLength !== postsToShow.length && postLength > 15 ? (

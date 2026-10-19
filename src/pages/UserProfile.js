@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { GlobalCtx } from '../App';
 import LikeBtn from '../components/LikeBtn';
 import FollowBtn from '../components/FollowBtn';
-import loading from '../components/Loading.gif';
+import Spinner from '../components/Spinner';
 const moment = require('moment');
 
 const postsPerPage = 15;
@@ -143,10 +143,10 @@ const UserProfile = (props) => {
             );
           })
         ) : postsToShow.length === 0 ? null : (
-          <>
-            <img id="load-gif" src={loading} alt="Loading" />
+          <div className="loading-state">
+            <Spinner />
             <p>Please wait while we grab your data</p>
-          </>
+          </div>
         )}
       </section>
       {postLength !== postsToShow.length && postLength > 15 ? (
