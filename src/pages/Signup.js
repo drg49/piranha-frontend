@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalCtx } from '../App';
-import Spinner from '../components/Spinner';
+import AuthLoading from '../components/AuthLoading';
 
 const Signup = (props) => {
-  const { gState } = useContext(GlobalCtx);
+  const { gState, setGState } = useContext(GlobalCtx);
   const { url } = gState;
 
   const blank = {
@@ -29,7 +29,9 @@ const Signup = (props) => {
     if (form.username.includes(' ')) {
       setErrorText('Username cannot have spaces');
     } else {
-      setSubmit(<Spinner />);
+      let accountCreated = false;
+      setErrorText('');
+      setSubmit(<AuthLoading />);
       fetch(`${url}/auth/signup`, {
         method: 'POST',
         headers: {
@@ -48,8 +50,53 @@ const Signup = (props) => {
               <input type="submit" value="Sign Up" id="create-account" />,
             );
           } else {
-            props.history.push('/login');
+            accountCreated = true;
+            return fetch(`${url}/auth/login`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ username, password }),
+            })
+              .then((response) => response.json())
+              .then((authData) => {
+                if (authData.error || !authData.token) {
+                  props.history.push({
+                    pathname: '/login',
+                    state: {
+                      message:
+                        'Your account was created, but automatic sign-in failed. Please log in.',
+                    },
+                  });
+                  return;
+                }
+
+                localStorage.setItem('token', JSON.stringify(authData));
+                localStorage.setItem('user', authData.username);
+                setGState({ ...gState, token: authData.token });
+                setForm(blank);
+                props.history.push('/');
+              });
           }
+        })
+        .catch(() => {
+          if (accountCreated) {
+            props.history.push({
+              pathname: '/login',
+              state: {
+                message:
+                  'Your account was created, but automatic sign-in failed. Please log in.',
+              },
+            });
+            return;
+          }
+
+          setErrorText(
+            'Unable to create your account right now. Please try again.',
+          );
+          setSubmit(
+            <input type="submit" value="Sign Up" id="create-account" />,
+          );
         });
     }
   };

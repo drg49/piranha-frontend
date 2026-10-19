@@ -304,6 +304,18 @@ form input {
   transition: all 200ms;
 }
 
+.auth-loading {
+  box-sizing: border-box;
+  width: min(367px, calc(100vw - 32px));
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+.auth-loading p {
+  margin: 0;
+  line-height: 1.4;
+}
+
 #form-bottom {
   display: flex;
   justify-content: center;

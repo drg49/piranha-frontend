@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GlobalCtx } from '../App';
-import Spinner from '../components/Spinner';
+import AuthLoading from '../components/AuthLoading';
 
 const Login = (props) => {
   const { gState, setGState } = useContext(GlobalCtx);
@@ -13,7 +13,9 @@ const Login = (props) => {
   };
 
   const [form, setForm] = useState(blank);
-  const [errorText, setErrorText] = useState('');
+  const [errorText, setErrorText] = useState(
+    props.location.state?.message || '',
+  );
   const [submit, setSubmit] = useState(
     <input type="submit" value="Login" id="login" />,
   );
@@ -33,7 +35,8 @@ const Login = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { username, password } = form;
-    setSubmit(<Spinner />);
+    setErrorText('');
+    setSubmit(<AuthLoading />);
     setRegister(null);
     fetch(`${url}/auth/login`, {
       method: 'POST',
@@ -75,6 +78,18 @@ const Login = (props) => {
           props.history.push('/');
           // window.location.reload()
         }
+      })
+      .catch(() => {
+        setErrorText('Unable to log in right now. Please try again.');
+        setSubmit(<input type="submit" value="Login" id="login" />);
+        setRegister(
+          <>
+            <p>Dont have an account?</p>
+            <Link to="/signup">
+              <p id="margin-space">Register</p>
+            </Link>
+          </>,
+        );
       });
   };
 
