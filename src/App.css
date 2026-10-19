@@ -17,7 +17,7 @@ a {
   text-decoration: none;
 }
 
-input[type=submit] {
+input[type='submit'] {
   -webkit-appearance: none;
 }
 
@@ -33,11 +33,11 @@ input[type=submit] {
 #app-name {
   font-family: 'Amatic SC', cursive;
   font-size: 48px;
-  -webkit-touch-callout: none; 
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none; 
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -50,27 +50,27 @@ input[type=submit] {
 }
 
 #see-more-btn {
+  display: block;
   padding: 9px 13px;
   background-color: rgb(22, 111, 229);
   border: none;
   color: white;
   border-radius: 6px;
   font-size: 16px;
-  margin-bottom: 15px;
+  margin: 0 auto 15px;
 }
 
 #see-more-btn:hover {
   cursor: pointer;
-  background-color: rgba(22, 111, 229, 0.85)
+  background-color: rgba(22, 111, 229, 0.85);
 }
 
 body {
   background-color: whitesmoke;
 }
 
-textarea  
-{  
-   font-family: Arial, Helvetica, sans-serif 
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* HEADER //////////////////////////////////// */
@@ -87,6 +87,13 @@ textarea
 /* /////////////////////////////////////////// */
 
 /* POST CARDS //////////////////////////////// */
+
+#post-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
 
 #post {
   border: 1px solid black;
@@ -106,25 +113,30 @@ textarea
   margin: 0px 20px 0px 20px;
 }
 
-#post-header h2, h3{
-  -webkit-touch-callout: none; 
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none; 
+#post-header h2,
+h3 {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
 img {
   width: 595px;
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(234,249,249,0.67) 0.1%, rgba(239,249,251,0.63) 90.1% );
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(234, 249, 249, 0.67) 0.1%,
+    rgba(239, 249, 251, 0.63) 90.1%
+  );
   max-height: 415px;
   object-fit: contain;
-  -webkit-touch-callout: none; 
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none; 
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -158,8 +170,8 @@ hr {
 }
 
 #edit-delete-btns button {
-  outline:none;
-  box-shadow:none;
+  outline: none;
+  box-shadow: none;
   border: none;
   width: 33px;
   height: 23px;
@@ -207,16 +219,15 @@ hr {
 
 #like-num {
   padding-left: 10px;
-  -webkit-touch-callout: none; 
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none; 
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
 /* /////////////////////////////////////////// */
-
 
 /* WELCOME - HOME PAGE /////////////////////// */
 
@@ -268,7 +279,6 @@ hr {
 
 /* /////////////////////////////////////////// */
 
-
 /* LOGIN - SIGNUP PAGES ////////////////////// */
 
 #account-form {
@@ -284,7 +294,8 @@ form input {
   padding: 14px 16px;
 }
 
-#login, #create-account {
+#login,
+#create-account {
   margin: auto;
   margin-top: 20px;
   width: 367px;
@@ -312,7 +323,6 @@ form input {
 
 /* /////////////////////////////////////////// */
 
-
 /* CREATE POST PAGE ////////////////////////// */
 
 #uploaded-img {
@@ -338,7 +348,7 @@ form input {
 
 #upload-btn:hover {
   cursor: pointer;
-  background-color: rgba(54, 164, 32, 0.85)
+  background-color: rgba(54, 164, 32, 0.85);
 }
 
 #create-caption {
@@ -371,7 +381,6 @@ textarea {
 
 /* /////////////////////////////////////////// */
 
-
 /* MY PROFILE PAGE /////////////////////////// */
 
 #create-btn {
@@ -385,7 +394,7 @@ textarea {
 
 #create-btn:hover {
   cursor: pointer;
-  background-color: rgba(54, 164, 32, 0.85)
+  background-color: rgba(54, 164, 32, 0.85);
 }
 
 #profile-header {
@@ -431,8 +440,8 @@ textarea {
   background: none;
   border: none;
   border-radius: 50%;
-  padding:  8px 11px;
-  color:rgb(47, 47, 47);
+  padding: 8px 11px;
+  color: rgb(47, 47, 47);
   transition: 280ms;
 }
 
@@ -542,7 +551,7 @@ textarea {
 }
 
 .file > input[type='file'] {
-  display: none
+  display: none;
 }
 
 .file > label {
@@ -592,7 +601,6 @@ textarea {
   background-color: hsl(204, 86%, 91%);
 }
 
-
 /* RESPONSIVE DESIGN //////////////////////////*/
 @media screen and (max-width: 595px) {
   img {
@@ -606,5 +614,4 @@ textarea {
     border-right: none;
     margin-bottom: 25px;
   }
-
 }
